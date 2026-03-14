@@ -1,0 +1,910 @@
+openapi: 3.1.0
+info:
+  title: Productiv Developer API
+  description: >-
+    The Productiv Developer APIs support integrating custom applications into the
+    Productiv platform, allowing external developers to define and publish new
+    connected applications. Once an application is properly defined, Productiv
+    supports APIs for pushing usage events and user information in a standardized
+    format, as well as Data Export APIs for fetching your company's app portfolio,
+    detailed app information, provisioning workflows, and audit events.
+  version: v1
+  contact:
+    name: Productiv Support
+    email: support@productiv.com
+    url: https://productiv.com/
+  license:
+    name: Proprietary
+    url: https://productiv.com/
+servers:
+  - url: https://public-api.productiv.com
+    description: Productiv Public API
+  - url: https://login.api.productiv.com
+    description: Productiv OAuth2 Authorization Server
+security:
+  - bearerAuth: []
+tags:
+  - name: Authentication
+    description: OAuth2 token endpoint for obtaining access tokens.
+  - name: Applications
+    description: Set up and manage custom applications within Productiv.
+  - name: Usage Events
+    description: Publish usage events for applications.
+  - name: Spend Data
+    description: Publish spend data for applications.
+  - name: Provisioned Users
+    description: Manage users provisioned to custom integrations.
+  - name: Org Chart
+    description: Publish organizational chart data.
+  - name: Batch Upload
+    description: Upload files in batch for applications.
+  - name: App Summaries
+    description: Query the list of apps in your company portfolio.
+  - name: App Details
+    description: Fetch detailed information about a particular app.
+  - name: Provisioning Workflows
+    description: >-
+      Fetch provisioning workflows and execution details.
+  - name: Audit Events
+    description: Fetch audit events for activities performed on the Productiv platform.
+paths:
+  /oauth2/token:
+    post:
+      operationId: getAccessToken
+      summary: Generate Access Token
+      description: >-
+        Obtain an OAuth2 access token using client credentials. The returned
+        access token must be included as a Bearer token in the Authorization
+        header of all subsequent API requests. Each API may require different
+        scopes.
+      tags:
+        - Authentication
+      security: []
+      servers:
+        - url: https://login.api.productiv.com
+          description: Productiv OAuth2 Authorization Server
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - grant_type
+                - client_id
+                - client_secret
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                    - client_credentials
+                  description: The OAuth2 grant type.
+                client_id:
+                  type: string
+                  description: Your application client ID.
+                client_secret:
+                  type: string
+                  description: Your application client secret.
+                scope:
+                  type: string
+                  description: >-
+                    Space-separated list of scopes. Available scopes include
+                    https://api.productiv.com/connector.write and
+                    https://api.productiv.com/report.read.
+      responses:
+        '200':
+          description: Successful token response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: The access token to use for API requests.
+                  token_type:
+                    type: string
+                    description: The type of the token, typically Bearer.
+                  expires_in:
+                    type: integer
+                    description: The number of seconds until the token expires.
+        '401':
+          description: Invalid client credentials.
+  /services/push/v1/customer/apps:
+    post:
+      operationId: setupApplication
+      summary: Set Up an Application
+      description: >-
+        Define and publish a new connected application to Productiv. This
+        registers the application and returns a unique appId that is used for
+        subsequent API calls such as publishing usage events and spend data.
+      tags:
+        - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - appName
+              properties:
+                appName:
+                  type: string
+                  description: The name of the application to register.
+                appDescription:
+                  type: string
+                  description: A description of the application.
+                appCategory:
+                  type: string
+                  description: The category of the application.
+                appUrl:
+                  type: string
+                  format: uri
+                  description: The URL of the application.
+      responses:
+        '200':
+          description: Application created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appId:
+                    type: string
+                    description: The unique identifier for the created application.
+                  appName:
+                    type: string
+                    description: The name of the application.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+  /services/push/v1/customer/apps/{appId}/usage-events:
+    post:
+      operationId: publishUsageEvents
+      summary: Publish Usage Events
+      description: >-
+        Push usage events for an application to Productiv. Usage events represent
+        actions performed by users, such as starting a video call, sending
+        messages, or uploading files. Every event is uniquely identified by the
+        combination of timestamp, email, and eventName. A maximum of 1000 events
+        can be pushed per request.
+      tags:
+        - Usage Events
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: The unique identifier of the application.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - events
+              properties:
+                events:
+                  type: array
+                  maxItems: 1000
+                  description: A list of usage events to push.
+                  items:
+                    type: object
+                    required:
+                      - timestamp
+                      - email
+                      - eventName
+                    properties:
+                      timestamp:
+                        type: integer
+                        format: int64
+                        description: >-
+                          The timestamp of the event in milliseconds since epoch.
+                      email:
+                        type: string
+                        format: email
+                        description: The email address of the user who performed the action.
+                      eventName:
+                        type: string
+                        description: The name of the action or activity performed.
+      responses:
+        '200':
+          description: Events published successfully.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+  /services/push/v1/customer/apps/{appId}/spend:
+    post:
+      operationId: publishSpendData
+      summary: Publish Spend Data
+      description: >-
+        Push spend data to Productiv for an application from one or more existing
+        systems. Before using this API, the application must be set up and a
+        unique appId obtained.
+      tags:
+        - Spend Data
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: The unique identifier of the application.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                spendData:
+                  type: array
+                  description: A list of spend data records.
+                  items:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                        description: The spend amount.
+                      currency:
+                        type: string
+                        description: The currency code.
+                      date:
+                        type: string
+                        format: date
+                        description: The date of the spend.
+                      description:
+                        type: string
+                        description: A description of the spend.
+      responses:
+        '200':
+          description: Spend data published successfully.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+  /services/push/v1/customer/apps/{appId}/users:
+    post:
+      operationId: publishProvisionedUsers
+      summary: Publish Provisioned Users
+      description: >-
+        Add provisioned users for an application in Productiv. Productiv treats
+        the set of provisioned users updated by the developer APIs as the current
+        list of all users for the application.
+      tags:
+        - Provisioned Users
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: The unique identifier of the application.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - users
+              properties:
+                users:
+                  type: array
+                  description: A list of users to provision.
+                  items:
+                    type: object
+                    required:
+                      - email
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                        description: The email address of the user.
+                      firstName:
+                        type: string
+                        description: The first name of the user.
+                      lastName:
+                        type: string
+                        description: The last name of the user.
+                      role:
+                        type: string
+                        description: The role of the user in the application.
+      responses:
+        '200':
+          description: Provisioned users published successfully.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+    get:
+      operationId: getProvisionedUsers
+      summary: Get Provisioned Users
+      description: >-
+        Retrieve the list of users provisioned to an application.
+      tags:
+        - Provisioned Users
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: The unique identifier of the application.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Provisioned users retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        email:
+                          type: string
+                          format: email
+                          description: The email address of the user.
+                        firstName:
+                          type: string
+                          description: The first name of the user.
+                        lastName:
+                          type: string
+                          description: The last name of the user.
+                        role:
+                          type: string
+                          description: The role of the user.
+        '401':
+          description: Unauthorized.
+    delete:
+      operationId: deleteProvisionedUsers
+      summary: Delete Provisioned Users
+      description: >-
+        Remove provisioned users from an application in Productiv.
+      tags:
+        - Provisioned Users
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: The unique identifier of the application.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - users
+              properties:
+                users:
+                  type: array
+                  description: A list of users to remove.
+                  items:
+                    type: object
+                    required:
+                      - email
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                        description: The email address of the user to remove.
+      responses:
+        '200':
+          description: Provisioned users removed successfully.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+  /services/push/v1/customer/org-chart:
+    put:
+      operationId: publishOrgChart
+      summary: Publish Org Chart
+      description: >-
+        Publish organizational chart data to Productiv. The endpoint accepts no
+        more than 1000 users per request. Multiple PUT requests to the same
+        resource ID are required if more than 1000 users need to be added.
+      tags:
+        - Org Chart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                users:
+                  type: array
+                  maxItems: 1000
+                  description: A list of users in the org chart.
+                  items:
+                    type: object
+                    required:
+                      - email
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                        description: The email address of the user.
+                      firstName:
+                        type: string
+                        description: First name of the user.
+                      lastName:
+                        type: string
+                        description: Last name of the user.
+                      managerEmail:
+                        type: string
+                        format: email
+                        description: The email address of the user's manager.
+                      department:
+                        type: string
+                        description: The department of the user.
+                      title:
+                        type: string
+                        description: The job title of the user.
+                customFieldsConfig:
+                  type: array
+                  description: >-
+                    Custom field definitions such as Date of Birth, Director, VP,
+                    Entity, and Business Unit.
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: The name of the custom field.
+                      type:
+                        type: string
+                        description: The data type of the custom field.
+      responses:
+        '200':
+          description: Org chart published successfully.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+  /services/push/v1/customer/apps/{appId}/upload:
+    get:
+      operationId: getBatchUploadUrls
+      summary: Get Batch File Upload URLs
+      description: >-
+        Get signed upload URLs for batch file uploads. Specify the filenames to
+        upload as query parameters, and the response will return signed URLs for
+        each file. Use the returned signed URLs to PUT each file.
+      tags:
+        - Batch Upload
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: The unique identifier of the application.
+          schema:
+            type: string
+        - name: filenames
+          in: query
+          required: true
+          description: The filenames to upload. Can be specified multiple times.
+          schema:
+            type: array
+            items:
+              type: string
+          explode: true
+      responses:
+        '200':
+          description: Signed upload URLs returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uploadUrls:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        filename:
+                          type: string
+                          description: The filename.
+                        uploadUrl:
+                          type: string
+                          format: uri
+                          description: The signed URL to upload the file to.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+  /services/export/v1/customer/app-summaries:
+    get:
+      operationId: getAppSummaries
+      summary: Get App Summaries
+      description: >-
+        Query the entire list of apps that are part of your company's portfolio.
+        Returns a small set of app attributes such as ApplicationId, AppStatus,
+        and VendorName. For more detailed information about a particular app, use
+        the App Details endpoint with the ApplicationId. Rate limit is 20
+        requests per second.
+      tags:
+        - App Summaries
+      responses:
+        '200':
+          description: App summaries returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  apps:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AppSummary'
+        '401':
+          description: Unauthorized.
+  /services/export/v1/customer/app-details/{applicationId}:
+    get:
+      operationId: getAppDetails
+      summary: Get App Details
+      description: >-
+        Fetch detailed information about a particular app that is not provided
+        in the App Summaries response. Additional details include Instances,
+        Activity, Contract, Fiscal Spend, Compliance, and SSO Protocols. Rate
+        limit is 20 requests per second.
+      tags:
+        - App Details
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          description: >-
+            The unique identifier of the application, obtained from the App
+            Summaries endpoint.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: App details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppDetails'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Application not found.
+  /services/export/v1/customer/provisioning-workflows:
+    get:
+      operationId: listProvisioningWorkflows
+      summary: List Provisioning Workflows
+      description: >-
+        Query the entire list of provisioning workflows configured on your
+        account. Rate limit is 20 requests per second.
+      tags:
+        - Provisioning Workflows
+      responses:
+        '200':
+          description: Provisioning workflows returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  workflows:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        workflowId:
+                          type: string
+                          description: The unique identifier of the workflow.
+                        workflowName:
+                          type: string
+                          description: The name of the workflow.
+                        applicationId:
+                          type: string
+                          description: The application associated with the workflow.
+                        status:
+                          type: string
+                          description: The status of the workflow.
+        '401':
+          description: Unauthorized.
+  /services/export/v1/customer/provisioning-workflows/{workflowId}/executions:
+    get:
+      operationId: listProvisioningExecutionSummaries
+      summary: List Provisioning Execution Summaries
+      description: >-
+        Query a list of provisioning workflow execution summaries for an
+        application instance within a time range.
+      tags:
+        - Provisioning Workflows
+      parameters:
+        - name: workflowId
+          in: path
+          required: true
+          description: The unique identifier of the provisioning workflow.
+          schema:
+            type: string
+        - name: startTime
+          in: query
+          description: Start time for the time range filter.
+          schema:
+            type: string
+            format: date-time
+        - name: endTime
+          in: query
+          description: End time for the time range filter.
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Execution summaries returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  executions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        executionId:
+                          type: string
+                          description: The unique identifier of the execution.
+                        workflowId:
+                          type: string
+                          description: The workflow identifier.
+                        status:
+                          type: string
+                          description: The status of the execution.
+                        startTime:
+                          type: string
+                          format: date-time
+                          description: When the execution started.
+                        endTime:
+                          type: string
+                          format: date-time
+                          description: When the execution completed.
+        '401':
+          description: Unauthorized.
+  /services/export/v1/customer/provisioning-workflows/{workflowId}/executions/{executionId}:
+    get:
+      operationId: getProvisioningWorkflowExecution
+      summary: Get Provisioning Workflow Execution
+      description: >-
+        Query the details of a specific provisioning workflow execution,
+        including suggested or actioned outcomes for matched users.
+      tags:
+        - Provisioning Workflows
+      parameters:
+        - name: workflowId
+          in: path
+          required: true
+          description: The unique identifier of the provisioning workflow.
+          schema:
+            type: string
+        - name: executionId
+          in: path
+          required: true
+          description: The unique identifier of the execution.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Execution details returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  executionId:
+                    type: string
+                    description: The unique identifier of the execution.
+                  workflowId:
+                    type: string
+                    description: The workflow identifier.
+                  status:
+                    type: string
+                    description: The status of the execution.
+                  users:
+                    type: array
+                    description: Users affected by the execution.
+                    items:
+                      type: object
+                      properties:
+                        email:
+                          type: string
+                          format: email
+                        suggestedOutcome:
+                          type: string
+                        actionedOutcome:
+                          type: string
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Execution not found.
+  /services/export/v1/customer/audit-events:
+    get:
+      operationId: getAuditEvents
+      summary: Get Audit Events
+      description: >-
+        Fetch a stream of audit events for activities performed by users on
+        the Productiv platform. Each request returns a maximum of 500 events.
+        If more events exist in the queried time range, the response contains
+        a nextPageToken for pagination.
+      tags:
+        - Audit Events
+      parameters:
+        - name: startTime
+          in: query
+          description: Start time for the query range.
+          schema:
+            type: string
+            format: date-time
+        - name: endTime
+          in: query
+          description: End time for the query range.
+          schema:
+            type: string
+            format: date-time
+        - name: nextPageToken
+          in: query
+          description: >-
+            Token for fetching the next page of results, obtained from a
+            previous response.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Audit events returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  events:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        eventId:
+                          type: string
+                          description: The unique identifier of the event.
+                        eventType:
+                          type: string
+                          description: The type of audit event.
+                        timestamp:
+                          type: string
+                          format: date-time
+                          description: When the event occurred.
+                        userEmail:
+                          type: string
+                          format: email
+                          description: The email of the user who performed the action.
+                        details:
+                          type: object
+                          description: Additional details about the event.
+                  nextPageToken:
+                    type: string
+                    description: >-
+                      Token to fetch the next page of results. Absent if there
+                      are no more results.
+        '401':
+          description: Unauthorized.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth2
+      description: >-
+        Bearer token obtained from the OAuth2 token endpoint at
+        https://login.api.productiv.com/oauth2/token using client credentials
+        grant type.
+  schemas:
+    AppSummary:
+      type: object
+      description: >-
+        Represents a single application with a limited set of attributes.
+      properties:
+        ApplicationId:
+          type: string
+          description: The unique identifier of the application.
+        AppName:
+          type: string
+          description: The name of the application.
+        AppStatus:
+          type: string
+          description: The current status of the application.
+        VendorName:
+          type: string
+          description: The name of the vendor.
+        AppCategory:
+          type: string
+          description: The category of the application.
+    AppDetails:
+      type: object
+      description: >-
+        Represents a single application with a larger set of attributes than
+        provided in the AppSummary, including Instances, Activity, Contract,
+        Fiscal Spend, Compliance, and SSO Protocols.
+      properties:
+        ApplicationId:
+          type: string
+          description: The unique identifier of the application.
+        AppName:
+          type: string
+          description: The name of the application.
+        AppStatus:
+          type: string
+          description: The current status of the application.
+        VendorName:
+          type: string
+          description: The name of the vendor.
+        Instances:
+          type: array
+          description: Application instances.
+          items:
+            type: object
+            properties:
+              instanceId:
+                type: string
+              instanceName:
+                type: string
+        Activity:
+          type: object
+          description: Usage activity metrics for the application.
+          properties:
+            totalUsers:
+              type: integer
+            activeUsers:
+              type: integer
+            lastActivityDate:
+              type: string
+              format: date
+        Contracts:
+          type: array
+          description: Contract details associated with the application.
+          items:
+            type: object
+            properties:
+              contractId:
+                type: string
+              startDate:
+                type: string
+                format: date
+              endDate:
+                type: string
+                format: date
+              totalValue:
+                type: number
+        FiscalSpend:
+          type: object
+          description: Fiscal spend data for the application.
+          properties:
+            totalSpend:
+              type: number
+            currency:
+              type: string
+        Compliance:
+          type: object
+          description: Security standard compliance information.
+          properties:
+            standards:
+              type: array
+              items:
+                type: string
+        SSOProtocols:
+          type: array
+          description: SSO protocols supported by the application.
+          items:
+            type: string
