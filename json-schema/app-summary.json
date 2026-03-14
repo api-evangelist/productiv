@@ -1,0 +1,29 @@
+{
+  "$id": "app-summary.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AppSummary",
+  "description": "Represents a single application with a limited set of attributes from the Productiv portfolio.",
+  "type": "object",
+  "properties": {
+    "ApplicationId": {
+      "type": "string",
+      "description": "The unique identifier of the application."
+    },
+    "AppName": {
+      "type": "string",
+      "description": "The name of the application."
+    },
+    "AppStatus": {
+      "type": "string",
+      "description": "The current status of the application."
+    },
+    "VendorName": {
+      "type": "string",
+      "description": "The name of the vendor."
+    },
+    "AppCategory": {
+      "type": "string",
+      "description": "The category of the application."
+    }
+  }
+}

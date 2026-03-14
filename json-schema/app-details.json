@@ -1,0 +1,122 @@
+{
+  "$id": "app-details.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AppDetails",
+  "description": "Represents a single application with detailed attributes including Instances, Activity, Contract, Fiscal Spend, Compliance, and SSO Protocols.",
+  "type": "object",
+  "properties": {
+    "ApplicationId": {
+      "type": "string",
+      "description": "The unique identifier of the application."
+    },
+    "AppName": {
+      "type": "string",
+      "description": "The name of the application."
+    },
+    "AppStatus": {
+      "type": "string",
+      "description": "The current status of the application."
+    },
+    "VendorName": {
+      "type": "string",
+      "description": "The name of the vendor."
+    },
+    "Instances": {
+      "type": "array",
+      "description": "Application instances.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "instanceId": {
+            "type": "string",
+            "description": "The unique identifier of the instance."
+          },
+          "instanceName": {
+            "type": "string",
+            "description": "The name of the instance."
+          }
+        }
+      }
+    },
+    "Activity": {
+      "type": "object",
+      "description": "Usage activity metrics for the application.",
+      "properties": {
+        "totalUsers": {
+          "type": "integer",
+          "description": "Total number of users."
+        },
+        "activeUsers": {
+          "type": "integer",
+          "description": "Number of active users."
+        },
+        "lastActivityDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The date of last activity."
+        }
+      }
+    },
+    "Contracts": {
+      "type": "array",
+      "description": "Contract details associated with the application.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "contractId": {
+            "type": "string",
+            "description": "The unique identifier of the contract."
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "description": "The start date of the contract."
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "description": "The end date of the contract."
+          },
+          "totalValue": {
+            "type": "number",
+            "description": "The total value of the contract."
+          }
+        }
+      }
+    },
+    "FiscalSpend": {
+      "type": "object",
+      "description": "Fiscal spend data for the application.",
+      "properties": {
+        "totalSpend": {
+          "type": "number",
+          "description": "Total spend amount."
+        },
+        "currency": {
+          "type": "string",
+          "description": "The currency code."
+        }
+      }
+    },
+    "Compliance": {
+      "type": "object",
+      "description": "Security standard compliance information.",
+      "properties": {
+        "standards": {
+          "type": "array",
+          "description": "List of compliance standards met.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SSOProtocols": {
+      "type": "array",
+      "description": "SSO protocols supported by the application.",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

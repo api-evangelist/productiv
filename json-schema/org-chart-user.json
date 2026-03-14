@@ -1,0 +1,38 @@
+{
+  "$id": "org-chart-user.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrgChartUser",
+  "description": "Represents a user entry in the organizational chart published to the Productiv platform.",
+  "type": "object",
+  "required": [
+    "email"
+  ],
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "The email address of the user."
+    },
+    "firstName": {
+      "type": "string",
+      "description": "First name of the user."
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Last name of the user."
+    },
+    "managerEmail": {
+      "type": "string",
+      "format": "email",
+      "description": "The email address of the user's manager."
+    },
+    "department": {
+      "type": "string",
+      "description": "The department of the user."
+    },
+    "title": {
+      "type": "string",
+      "description": "The job title of the user."
+    }
+  }
+}

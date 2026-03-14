@@ -1,0 +1,25 @@
+{
+  "$id": "provisioning-workflow.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProvisioningWorkflow",
+  "description": "Represents a provisioning workflow configured for an application in the Productiv platform.",
+  "type": "object",
+  "properties": {
+    "workflowId": {
+      "type": "string",
+      "description": "The unique identifier of the workflow."
+    },
+    "workflowName": {
+      "type": "string",
+      "description": "The name of the workflow."
+    },
+    "applicationId": {
+      "type": "string",
+      "description": "The application associated with the workflow."
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the workflow."
+    }
+  }
+}

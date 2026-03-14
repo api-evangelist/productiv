@@ -1,0 +1,76 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "productiv": "https://public-api.productiv.com/schema/",
+    "Application": "productiv:Application",
+    "AppSummary": "productiv:AppSummary",
+    "AppDetails": "productiv:AppDetails",
+    "UsageEvent": "productiv:UsageEvent",
+    "SpendData": "productiv:SpendData",
+    "ProvisionedUser": "productiv:ProvisionedUser",
+    "OrgChartUser": "productiv:OrgChartUser",
+    "ProvisioningWorkflow": "productiv:ProvisioningWorkflow",
+    "AuditEvent": "productiv:AuditEvent",
+    "appId": "productiv:appId",
+    "appName": {
+      "@id": "productiv:appName",
+      "@type": "xsd:string"
+    },
+    "appDescription": {
+      "@id": "productiv:appDescription",
+      "@type": "xsd:string"
+    },
+    "appCategory": {
+      "@id": "productiv:appCategory",
+      "@type": "xsd:string"
+    },
+    "appUrl": {
+      "@id": "productiv:appUrl",
+      "@type": "@id"
+    },
+    "ApplicationId": "productiv:ApplicationId",
+    "AppName": "productiv:AppName",
+    "AppStatus": "productiv:AppStatus",
+    "VendorName": "productiv:VendorName",
+    "AppCategory": "productiv:AppCategory",
+    "email": "schema:email",
+    "firstName": "schema:givenName",
+    "lastName": "schema:familyName",
+    "role": "schema:roleName",
+    "department": "schema:department",
+    "title": "schema:jobTitle",
+    "managerEmail": "productiv:managerEmail",
+    "timestamp": {
+      "@id": "productiv:timestamp",
+      "@type": "xsd:dateTime"
+    },
+    "eventName": "productiv:eventName",
+    "eventType": "productiv:eventType",
+    "eventId": "productiv:eventId",
+    "userEmail": "productiv:userEmail",
+    "amount": "schema:price",
+    "currency": "schema:priceCurrency",
+    "date": "schema:date",
+    "description": "schema:description",
+    "workflowId": "productiv:workflowId",
+    "workflowName": "productiv:workflowName",
+    "applicationId": "productiv:applicationId",
+    "status": "productiv:status",
+    "executionId": "productiv:executionId",
+    "startTime": "productiv:startTime",
+    "endTime": "productiv:endTime",
+    "totalUsers": "productiv:totalUsers",
+    "activeUsers": "productiv:activeUsers",
+    "lastActivityDate": "productiv:lastActivityDate",
+    "totalSpend": "productiv:totalSpend",
+    "totalValue": "productiv:totalValue",
+    "contractId": "productiv:contractId",
+    "startDate": "productiv:startDate",
+    "endDate": "productiv:endDate",
+    "instanceId": "productiv:instanceId",
+    "instanceName": "productiv:instanceName",
+    "suggestedOutcome": "productiv:suggestedOutcome",
+    "actionedOutcome": "productiv:actionedOutcome",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$id": "spend-data.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SpendData",
+  "description": "Represents spend data for an application tracked in the Productiv platform.",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "type": "number",
+      "description": "The spend amount."
+    },
+    "currency": {
+      "type": "string",
+      "description": "The currency code (e.g., USD)."
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "The date of the spend."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the spend."
+    }
+  }
+}

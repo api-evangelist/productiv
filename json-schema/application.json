@@ -1,0 +1,33 @@
+{
+  "$id": "application.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Application",
+  "description": "Represents a custom application registered in the Productiv platform.",
+  "type": "object",
+  "required": [
+    "appName"
+  ],
+  "properties": {
+    "appId": {
+      "type": "string",
+      "description": "The unique identifier for the application."
+    },
+    "appName": {
+      "type": "string",
+      "description": "The name of the application."
+    },
+    "appDescription": {
+      "type": "string",
+      "description": "A description of the application."
+    },
+    "appCategory": {
+      "type": "string",
+      "description": "The category of the application."
+    },
+    "appUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URL of the application."
+    }
+  }
+}

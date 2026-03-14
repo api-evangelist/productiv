@@ -48,6 +48,39 @@ apis:
         url: https://docs.app.productiv.com/developer-api/authorization.html
       - type: GettingStarted
         url: https://docs.app.productiv.com/developer-api/data-export-getting-started.html
+      - type: JSONSchema
+        url: json-schema/application.json
+      - type: JSONSchema
+        url: json-schema/app-summary.json
+      - type: JSONSchema
+        url: json-schema/app-details.json
+      - type: JSONSchema
+        url: json-schema/usage-event.json
+      - type: JSONSchema
+        url: json-schema/spend-data.json
+      - type: JSONSchema
+        url: json-schema/provisioned-user.json
+      - type: JSONSchema
+        url: json-schema/org-chart-user.json
+      - type: JSONSchema
+        url: json-schema/provisioning-workflow.json
+      - type: JSONSchema
+        url: json-schema/audit-event.json
+      - type: JSONLD
+        url: json-ld/productiv-context.jsonld
+common:
+  - url: https://docs.app.productiv.com/
+    name: Documentation
+    type: Documentation
+    description: 'null'
+  - url: https://productiv.com/
+    name: Website
+    type: Website
+    description: 'null'
+  - url: https://docs.app.productiv.com/developer-api/authorization.html
+    name: Authorization
+    type: Authorization
+    description: 'null'
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com

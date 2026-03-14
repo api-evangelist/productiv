@@ -1,0 +1,27 @@
+{
+  "$id": "usage-event.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UsageEvent",
+  "description": "Represents a usage event for an application, capturing user actions such as starting a video call, sending messages, or uploading files.",
+  "type": "object",
+  "required": [
+    "timestamp",
+    "email",
+    "eventName"
+  ],
+  "properties": {
+    "timestamp": {
+      "type": "integer",
+      "description": "The timestamp of the event in milliseconds since epoch."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "The email address of the user who performed the action."
+    },
+    "eventName": {
+      "type": "string",
+      "description": "The name of the action or activity performed."
+    }
+  }
+}

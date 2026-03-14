@@ -1,0 +1,31 @@
+{
+  "$id": "audit-event.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AuditEvent",
+  "description": "Represents an audit event for activities performed by users on the Productiv platform.",
+  "type": "object",
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "description": "The unique identifier of the event."
+    },
+    "eventType": {
+      "type": "string",
+      "description": "The type of audit event."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the event occurred."
+    },
+    "userEmail": {
+      "type": "string",
+      "format": "email",
+      "description": "The email of the user who performed the action."
+    },
+    "details": {
+      "type": "object",
+      "description": "Additional details about the event."
+    }
+  }
+}
