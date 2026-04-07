@@ -10,11 +10,11 @@ position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - SaaS Management
-  - Usage Analytics
-  - Spend Management
-  - Provisioning
   - Application Portfolio
+  - Provisioning
+  - SaaS Management
+  - Spend Management
+  - Usage Analytics
 created: '2025-07-11'
 modified: '2026-03-14'
 url: >-
@@ -32,13 +32,13 @@ apis:
     humanURL: https://docs.app.productiv.com/developer-api/index.html
     baseURL: https://public-api.productiv.com
     tags:
-      - SaaS Management
-      - Usage Analytics
-      - Spend Data
-      - Provisioning
       - Application Portfolio
-      - Data Export
       - Audit Events
+      - Data Export
+      - Provisioning
+      - SaaS Management
+      - Spend Data
+      - Usage Analytics
     properties:
       - type: Documentation
         url: https://docs.app.productiv.com/developer-api/index.html

@@ -24,29 +24,29 @@ servers:
 security:
   - bearerAuth: []
 tags:
-  - name: Authentication
-    description: OAuth2 token endpoint for obtaining access tokens.
-  - name: Applications
-    description: Set up and manage custom applications within Productiv.
-  - name: Usage Events
-    description: Publish usage events for applications.
-  - name: Spend Data
-    description: Publish spend data for applications.
-  - name: Provisioned Users
-    description: Manage users provisioned to custom integrations.
-  - name: Org Chart
-    description: Publish organizational chart data.
-  - name: Batch Upload
-    description: Upload files in batch for applications.
-  - name: App Summaries
-    description: Query the list of apps in your company portfolio.
   - name: App Details
     description: Fetch detailed information about a particular app.
+  - name: App Summaries
+    description: Query the list of apps in your company portfolio.
+  - name: Applications
+    description: Set up and manage custom applications within Productiv.
+  - name: Audit Events
+    description: Fetch audit events for activities performed on the Productiv platform.
+  - name: Authentication
+    description: OAuth2 token endpoint for obtaining access tokens.
+  - name: Batch Upload
+    description: Upload files in batch for applications.
+  - name: Org Chart
+    description: Publish organizational chart data.
+  - name: Provisioned Users
+    description: Manage users provisioned to custom integrations.
   - name: Provisioning Workflows
     description: >-
       Fetch provisioning workflows and execution details.
-  - name: Audit Events
-    description: Fetch audit events for activities performed on the Productiv platform.
+  - name: Spend Data
+    description: Publish spend data for applications.
+  - name: Usage Events
+    description: Publish usage events for applications.
 paths:
   /oauth2/token:
     post:
