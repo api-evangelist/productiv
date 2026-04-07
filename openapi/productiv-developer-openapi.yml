@@ -51,7 +51,7 @@ paths:
   /oauth2/token:
     post:
       operationId: getAccessToken
-      summary: Generate Access Token
+      summary: Productiv Generate Access Token
       description: >-
         Obtain an OAuth2 access token using client credentials. The returned
         access token must be included as a Bearer token in the Authorization
@@ -113,7 +113,7 @@ paths:
   /services/push/v1/customer/apps:
     post:
       operationId: setupApplication
-      summary: Set Up an Application
+      summary: Productiv Set Up an Application
       description: >-
         Define and publish a new connected application to Productiv. This
         registers the application and returns a unique appId that is used for
@@ -163,7 +163,7 @@ paths:
   /services/push/v1/customer/apps/{appId}/usage-events:
     post:
       operationId: publishUsageEvents
-      summary: Publish Usage Events
+      summary: Productiv Publish Usage Events
       description: >-
         Push usage events for an application to Productiv. Usage events represent
         actions performed by users, such as starting a video call, sending
@@ -221,7 +221,7 @@ paths:
   /services/push/v1/customer/apps/{appId}/spend:
     post:
       operationId: publishSpendData
-      summary: Publish Spend Data
+      summary: Productiv Publish Spend Data
       description: >-
         Push spend data to Productiv for an application from one or more existing
         systems. Before using this API, the application must be set up and a
@@ -271,7 +271,7 @@ paths:
   /services/push/v1/customer/apps/{appId}/users:
     post:
       operationId: publishProvisionedUsers
-      summary: Publish Provisioned Users
+      summary: Productiv Publish Provisioned Users
       description: >-
         Add provisioned users for an application in Productiv. Productiv treats
         the set of provisioned users updated by the developer APIs as the current
@@ -324,7 +324,7 @@ paths:
           description: Unauthorized.
     get:
       operationId: getProvisionedUsers
-      summary: Get Provisioned Users
+      summary: Productiv Get Provisioned Users
       description: >-
         Retrieve the list of users provisioned to an application.
       tags:
@@ -366,7 +366,7 @@ paths:
           description: Unauthorized.
     delete:
       operationId: deleteProvisionedUsers
-      summary: Delete Provisioned Users
+      summary: Productiv Delete Provisioned Users
       description: >-
         Remove provisioned users from an application in Productiv.
       tags:
@@ -409,7 +409,7 @@ paths:
   /services/push/v1/customer/org-chart:
     put:
       operationId: publishOrgChart
-      summary: Publish Org Chart
+      summary: Productiv Publish Org Chart
       description: >-
         Publish organizational chart data to Productiv. The endpoint accepts no
         more than 1000 users per request. Multiple PUT requests to the same
@@ -476,7 +476,7 @@ paths:
   /services/push/v1/customer/apps/{appId}/upload:
     get:
       operationId: getBatchUploadUrls
-      summary: Get Batch File Upload URLs
+      summary: Productiv Get Batch File Upload URLs
       description: >-
         Get signed upload URLs for batch file uploads. Specify the filenames to
         upload as query parameters, and the response will return signed URLs for
@@ -526,7 +526,7 @@ paths:
   /services/export/v1/customer/app-summaries:
     get:
       operationId: getAppSummaries
-      summary: Get App Summaries
+      summary: Productiv Get App Summaries
       description: >-
         Query the entire list of apps that are part of your company's portfolio.
         Returns a small set of app attributes such as ApplicationId, AppStatus,
@@ -552,7 +552,7 @@ paths:
   /services/export/v1/customer/app-details/{applicationId}:
     get:
       operationId: getAppDetails
-      summary: Get App Details
+      summary: Productiv Get App Details
       description: >-
         Fetch detailed information about a particular app that is not provided
         in the App Summaries response. Additional details include Instances,
@@ -583,7 +583,7 @@ paths:
   /services/export/v1/customer/provisioning-workflows:
     get:
       operationId: listProvisioningWorkflows
-      summary: List Provisioning Workflows
+      summary: Productiv List Provisioning Workflows
       description: >-
         Query the entire list of provisioning workflows configured on your
         account. Rate limit is 20 requests per second.
@@ -619,7 +619,7 @@ paths:
   /services/export/v1/customer/provisioning-workflows/{workflowId}/executions:
     get:
       operationId: listProvisioningExecutionSummaries
-      summary: List Provisioning Execution Summaries
+      summary: Productiv List Provisioning Execution Summaries
       description: >-
         Query a list of provisioning workflow execution summaries for an
         application instance within a time range.
@@ -679,7 +679,7 @@ paths:
   /services/export/v1/customer/provisioning-workflows/{workflowId}/executions/{executionId}:
     get:
       operationId: getProvisioningWorkflowExecution
-      summary: Get Provisioning Workflow Execution
+      summary: Productiv Get Provisioning Workflow Execution
       description: >-
         Query the details of a specific provisioning workflow execution,
         including suggested or actioned outcomes for matched users.
@@ -735,7 +735,7 @@ paths:
   /services/export/v1/customer/audit-events:
     get:
       operationId: getAuditEvents
-      summary: Get Audit Events
+      summary: Productiv Get Audit Events
       description: >-
         Fetch a stream of audit events for activities performed by users on
         the Productiv platform. Each request returns a maximum of 500 events.
