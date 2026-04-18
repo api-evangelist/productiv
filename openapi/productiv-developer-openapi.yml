@@ -17,36 +17,36 @@ info:
     name: Proprietary
     url: https://productiv.com/
 servers:
-  - url: https://public-api.productiv.com
-    description: Productiv Public API
-  - url: https://login.api.productiv.com
-    description: Productiv OAuth2 Authorization Server
+- url: https://public-api.productiv.com
+  description: Productiv Public API
+- url: https://login.api.productiv.com
+  description: Productiv OAuth2 Authorization Server
 security:
-  - bearerAuth: []
+- bearerAuth: []
 tags:
-  - name: App Details
-    description: Fetch detailed information about a particular app.
-  - name: App Summaries
-    description: Query the list of apps in your company portfolio.
-  - name: Applications
-    description: Set up and manage custom applications within Productiv.
-  - name: Audit Events
-    description: Fetch audit events for activities performed on the Productiv platform.
-  - name: Authentication
-    description: OAuth2 token endpoint for obtaining access tokens.
-  - name: Batch Upload
-    description: Upload files in batch for applications.
-  - name: Org Chart
-    description: Publish organizational chart data.
-  - name: Provisioned Users
-    description: Manage users provisioned to custom integrations.
-  - name: Provisioning Workflows
-    description: >-
-      Fetch provisioning workflows and execution details.
-  - name: Spend Data
-    description: Publish spend data for applications.
-  - name: Usage Events
-    description: Publish usage events for applications.
+- name: App Details
+  description: Fetch detailed information about a particular app.
+- name: App Summaries
+  description: Query the list of apps in your company portfolio.
+- name: Applications
+  description: Set up and manage custom applications within Productiv.
+- name: Audit Events
+  description: Fetch audit events for activities performed on the Productiv platform.
+- name: Authentication
+  description: OAuth2 token endpoint for obtaining access tokens.
+- name: Batch Upload
+  description: Upload files in batch for applications.
+- name: Org Chart
+  description: Publish organizational chart data.
+- name: Provisioned Users
+  description: Manage users provisioned to custom integrations.
+- name: Provisioning Workflows
+  description: >-
+    Fetch provisioning workflows and execution details.
+- name: Spend Data
+  description: Publish spend data for applications.
+- name: Usage Events
+  description: Publish usage events for applications.
 paths:
   /oauth2/token:
     post:
@@ -58,11 +58,11 @@ paths:
         header of all subsequent API requests. Each API may require different
         scopes.
       tags:
-        - Authentication
+      - Authentication
       security: []
       servers:
-        - url: https://login.api.productiv.com
-          description: Productiv OAuth2 Authorization Server
+      - url: https://login.api.productiv.com
+        description: Productiv OAuth2 Authorization Server
       requestBody:
         required: true
         content:
@@ -70,14 +70,14 @@ paths:
             schema:
               type: object
               required:
-                - grant_type
-                - client_id
-                - client_secret
+              - grant_type
+              - client_id
+              - client_secret
               properties:
                 grant_type:
                   type: string
                   enum:
-                    - client_credentials
+                  - client_credentials
                   description: The OAuth2 grant type.
                 client_id:
                   type: string
@@ -91,6 +91,15 @@ paths:
                     Space-separated list of scopes. Available scopes include
                     https://api.productiv.com/connector.write and
                     https://api.productiv.com/report.read.
+            examples:
+              GetaccesstokenRequestExample:
+                summary: Default getAccessToken request
+                x-microcks-default: true
+                value:
+                  grant_type: client_credentials
+                  client_id: '500123'
+                  client_secret: example_value
+                  scope: example_value
       responses:
         '200':
           description: Successful token response.
@@ -108,18 +117,29 @@ paths:
                   expires_in:
                     type: integer
                     description: The number of seconds until the token expires.
+              examples:
+                Getaccesstoken200Example:
+                  summary: Default getAccessToken 200 response
+                  x-microcks-default: true
+                  value:
+                    access_token: example_value
+                    token_type: example_value
+                    expires_in: 10
         '401':
           description: Invalid client credentials.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /services/push/v1/customer/apps:
     post:
       operationId: setupApplication
-      summary: Productiv Set Up an Application
+      summary: Productiv Set up an Application
       description: >-
         Define and publish a new connected application to Productiv. This
         registers the application and returns a unique appId that is used for
         subsequent API calls such as publishing usage events and spend data.
       tags:
-        - Applications
+      - Applications
       requestBody:
         required: true
         content:
@@ -127,7 +147,7 @@ paths:
             schema:
               type: object
               required:
-                - appName
+              - appName
               properties:
                 appName:
                   type: string
@@ -142,6 +162,15 @@ paths:
                   type: string
                   format: uri
                   description: The URL of the application.
+            examples:
+              SetupapplicationRequestExample:
+                summary: Default setupApplication request
+                x-microcks-default: true
+                value:
+                  appName: example_value
+                  appDescription: example_value
+                  appCategory: example_value
+                  appUrl: https://www.example.com
       responses:
         '200':
           description: Application created successfully.
@@ -156,10 +185,20 @@ paths:
                   appName:
                     type: string
                     description: The name of the application.
+              examples:
+                Setupapplication200Example:
+                  summary: Default setupApplication 200 response
+                  x-microcks-default: true
+                  value:
+                    appId: '500123'
+                    appName: example_value
         '400':
           description: Bad request.
         '401':
           description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /services/push/v1/customer/apps/{appId}/usage-events:
     post:
       operationId: publishUsageEvents
@@ -171,14 +210,15 @@ paths:
         combination of timestamp, email, and eventName. A maximum of 1000 events
         can be pushed per request.
       tags:
-        - Usage Events
+      - Usage Events
       parameters:
-        - name: appId
-          in: path
-          required: true
-          description: The unique identifier of the application.
-          schema:
-            type: string
+      - name: appId
+        in: path
+        required: true
+        description: The unique identifier of the application.
+        schema:
+          type: string
+        example: '500123'
       requestBody:
         required: true
         content:
@@ -186,7 +226,7 @@ paths:
             schema:
               type: object
               required:
-                - events
+              - events
               properties:
                 events:
                   type: array
@@ -195,9 +235,9 @@ paths:
                   items:
                     type: object
                     required:
-                      - timestamp
-                      - email
-                      - eventName
+                    - timestamp
+                    - email
+                    - eventName
                     properties:
                       timestamp:
                         type: integer
@@ -211,6 +251,15 @@ paths:
                       eventName:
                         type: string
                         description: The name of the action or activity performed.
+            examples:
+              PublishusageeventsRequestExample:
+                summary: Default publishUsageEvents request
+                x-microcks-default: true
+                value:
+                  events:
+                  - timestamp: 10
+                    email: user@example.com
+                    eventName: example_value
       responses:
         '200':
           description: Events published successfully.
@@ -218,6 +267,9 @@ paths:
           description: Bad request.
         '401':
           description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /services/push/v1/customer/apps/{appId}/spend:
     post:
       operationId: publishSpendData
@@ -227,14 +279,15 @@ paths:
         systems. Before using this API, the application must be set up and a
         unique appId obtained.
       tags:
-        - Spend Data
+      - Spend Data
       parameters:
-        - name: appId
-          in: path
-          required: true
-          description: The unique identifier of the application.
-          schema:
-            type: string
+      - name: appId
+        in: path
+        required: true
+        description: The unique identifier of the application.
+        schema:
+          type: string
+        example: '500123'
       requestBody:
         required: true
         content:
@@ -261,6 +314,16 @@ paths:
                       description:
                         type: string
                         description: A description of the spend.
+            examples:
+              PublishspenddataRequestExample:
+                summary: Default publishSpendData request
+                x-microcks-default: true
+                value:
+                  spendData:
+                  - amount: 42.5
+                    currency: example_value
+                    date: '2026-01-15'
+                    description: A sample description.
       responses:
         '200':
           description: Spend data published successfully.
@@ -268,6 +331,9 @@ paths:
           description: Bad request.
         '401':
           description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /services/push/v1/customer/apps/{appId}/users:
     post:
       operationId: publishProvisionedUsers
@@ -277,14 +343,15 @@ paths:
         the set of provisioned users updated by the developer APIs as the current
         list of all users for the application.
       tags:
-        - Provisioned Users
+      - Provisioned Users
       parameters:
-        - name: appId
-          in: path
-          required: true
-          description: The unique identifier of the application.
-          schema:
-            type: string
+      - name: appId
+        in: path
+        required: true
+        description: The unique identifier of the application.
+        schema:
+          type: string
+        example: '500123'
       requestBody:
         required: true
         content:
@@ -292,7 +359,7 @@ paths:
             schema:
               type: object
               required:
-                - users
+              - users
               properties:
                 users:
                   type: array
@@ -300,7 +367,7 @@ paths:
                   items:
                     type: object
                     required:
-                      - email
+                    - email
                     properties:
                       email:
                         type: string
@@ -315,6 +382,16 @@ paths:
                       role:
                         type: string
                         description: The role of the user in the application.
+            examples:
+              PublishprovisionedusersRequestExample:
+                summary: Default publishProvisionedUsers request
+                x-microcks-default: true
+                value:
+                  users:
+                  - email: user@example.com
+                    firstName: example_value
+                    lastName: example_value
+                    role: example_value
       responses:
         '200':
           description: Provisioned users published successfully.
@@ -322,20 +399,24 @@ paths:
           description: Bad request.
         '401':
           description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     get:
       operationId: getProvisionedUsers
       summary: Productiv Get Provisioned Users
       description: >-
         Retrieve the list of users provisioned to an application.
       tags:
-        - Provisioned Users
+      - Provisioned Users
       parameters:
-        - name: appId
-          in: path
-          required: true
-          description: The unique identifier of the application.
-          schema:
-            type: string
+      - name: appId
+        in: path
+        required: true
+        description: The unique identifier of the application.
+        schema:
+          type: string
+        example: '500123'
       responses:
         '200':
           description: Provisioned users retrieved successfully.
@@ -362,22 +443,36 @@ paths:
                         role:
                           type: string
                           description: The role of the user.
+              examples:
+                Getprovisionedusers200Example:
+                  summary: Default getProvisionedUsers 200 response
+                  x-microcks-default: true
+                  value:
+                    users:
+                    - email: user@example.com
+                      firstName: example_value
+                      lastName: example_value
+                      role: example_value
         '401':
           description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteProvisionedUsers
       summary: Productiv Delete Provisioned Users
       description: >-
         Remove provisioned users from an application in Productiv.
       tags:
-        - Provisioned Users
+      - Provisioned Users
       parameters:
-        - name: appId
-          in: path
-          required: true
-          description: The unique identifier of the application.
-          schema:
-            type: string
+      - name: appId
+        in: path
+        required: true
+        description: The unique identifier of the application.
+        schema:
+          type: string
+        example: '500123'
       requestBody:
         required: true
         content:
@@ -385,7 +480,7 @@ paths:
             schema:
               type: object
               required:
-                - users
+              - users
               properties:
                 users:
                   type: array
@@ -393,12 +488,19 @@ paths:
                   items:
                     type: object
                     required:
-                      - email
+                    - email
                     properties:
                       email:
                         type: string
                         format: email
                         description: The email address of the user to remove.
+            examples:
+              DeleteprovisionedusersRequestExample:
+                summary: Default deleteProvisionedUsers request
+                x-microcks-default: true
+                value:
+                  users:
+                  - email: user@example.com
       responses:
         '200':
           description: Provisioned users removed successfully.
@@ -406,6 +508,9 @@ paths:
           description: Bad request.
         '401':
           description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /services/push/v1/customer/org-chart:
     put:
       operationId: publishOrgChart
@@ -415,7 +520,7 @@ paths:
         more than 1000 users per request. Multiple PUT requests to the same
         resource ID are required if more than 1000 users need to be added.
       tags:
-        - Org Chart
+      - Org Chart
       requestBody:
         required: true
         content:
@@ -430,7 +535,7 @@ paths:
                   items:
                     type: object
                     required:
-                      - email
+                    - email
                     properties:
                       email:
                         type: string
@@ -466,6 +571,21 @@ paths:
                       type:
                         type: string
                         description: The data type of the custom field.
+            examples:
+              PublishorgchartRequestExample:
+                summary: Default publishOrgChart request
+                x-microcks-default: true
+                value:
+                  users:
+                  - email: user@example.com
+                    firstName: example_value
+                    lastName: example_value
+                    managerEmail: user@example.com
+                    department: example_value
+                    title: Example Title
+                  customFieldsConfig:
+                  - name: Example Title
+                    type: example_value
       responses:
         '200':
           description: Org chart published successfully.
@@ -473,32 +593,37 @@ paths:
           description: Bad request.
         '401':
           description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /services/push/v1/customer/apps/{appId}/upload:
     get:
       operationId: getBatchUploadUrls
-      summary: Productiv Get Batch File Upload URLs
+      summary: Productiv Get Batch File Upload Urls
       description: >-
         Get signed upload URLs for batch file uploads. Specify the filenames to
         upload as query parameters, and the response will return signed URLs for
         each file. Use the returned signed URLs to PUT each file.
       tags:
-        - Batch Upload
+      - Batch Upload
       parameters:
-        - name: appId
-          in: path
-          required: true
-          description: The unique identifier of the application.
-          schema:
+      - name: appId
+        in: path
+        required: true
+        description: The unique identifier of the application.
+        schema:
+          type: string
+        example: '500123'
+      - name: filenames
+        in: query
+        required: true
+        description: The filenames to upload. Can be specified multiple times.
+        schema:
+          type: array
+          items:
             type: string
-        - name: filenames
-          in: query
-          required: true
-          description: The filenames to upload. Can be specified multiple times.
-          schema:
-            type: array
-            items:
-              type: string
-          explode: true
+        explode: true
+        example: []
       responses:
         '200':
           description: Signed upload URLs returned successfully.
@@ -519,10 +644,21 @@ paths:
                           type: string
                           format: uri
                           description: The signed URL to upload the file to.
+              examples:
+                Getbatchuploadurls200Example:
+                  summary: Default getBatchUploadUrls 200 response
+                  x-microcks-default: true
+                  value:
+                    uploadUrls:
+                    - filename: example_value
+                      uploadUrl: https://www.example.com
         '400':
           description: Bad request.
         '401':
           description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /services/export/v1/customer/app-summaries:
     get:
       operationId: getAppSummaries
@@ -534,7 +670,7 @@ paths:
         the App Details endpoint with the ApplicationId. Rate limit is 20
         requests per second.
       tags:
-        - App Summaries
+      - App Summaries
       responses:
         '200':
           description: App summaries returned successfully.
@@ -547,8 +683,22 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/AppSummary'
+              examples:
+                Getappsummaries200Example:
+                  summary: Default getAppSummaries 200 response
+                  x-microcks-default: true
+                  value:
+                    apps:
+                    - ApplicationId: '500123'
+                      AppName: example_value
+                      AppStatus: example_value
+                      VendorName: example_value
+                      AppCategory: example_value
         '401':
           description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /services/export/v1/customer/app-details/{applicationId}:
     get:
       operationId: getAppDetails
@@ -559,16 +709,17 @@ paths:
         Activity, Contract, Fiscal Spend, Compliance, and SSO Protocols. Rate
         limit is 20 requests per second.
       tags:
-        - App Details
+      - App Details
       parameters:
-        - name: applicationId
-          in: path
-          required: true
-          description: >-
-            The unique identifier of the application, obtained from the App
-            Summaries endpoint.
-          schema:
-            type: string
+      - name: applicationId
+        in: path
+        required: true
+        description: >-
+          The unique identifier of the application, obtained from the App
+          Summaries endpoint.
+        schema:
+          type: string
+        example: '500123'
       responses:
         '200':
           description: App details returned successfully.
@@ -576,10 +727,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AppDetails'
+              examples:
+                Getappdetails200Example:
+                  summary: Default getAppDetails 200 response
+                  x-microcks-default: true
+                  value:
+                    ApplicationId: '500123'
+                    AppName: example_value
+                    AppStatus: example_value
+                    VendorName: example_value
+                    Instances:
+                    - instanceId: '500123'
+                      instanceName: example_value
+                    Activity:
+                      totalUsers: 10
+                      activeUsers: 10
+                      lastActivityDate: '2026-01-15'
+                    Contracts:
+                    - contractId: '500123'
+                      startDate: '2026-01-15'
+                      endDate: '2026-01-15'
+                      totalValue: 42.5
+                    FiscalSpend:
+                      totalSpend: 42.5
+                      currency: example_value
+                    Compliance:
+                      standards:
+                      - example_value
+                    SSOProtocols:
+                    - example_value
         '401':
           description: Unauthorized.
         '404':
           description: Application not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /services/export/v1/customer/provisioning-workflows:
     get:
       operationId: listProvisioningWorkflows
@@ -588,7 +771,7 @@ paths:
         Query the entire list of provisioning workflows configured on your
         account. Rate limit is 20 requests per second.
       tags:
-        - Provisioning Workflows
+      - Provisioning Workflows
       responses:
         '200':
           description: Provisioning workflows returned successfully.
@@ -614,8 +797,21 @@ paths:
                         status:
                           type: string
                           description: The status of the workflow.
+              examples:
+                Listprovisioningworkflows200Example:
+                  summary: Default listProvisioningWorkflows 200 response
+                  x-microcks-default: true
+                  value:
+                    workflows:
+                    - workflowId: '500123'
+                      workflowName: example_value
+                      applicationId: '500123'
+                      status: example_value
         '401':
           description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /services/export/v1/customer/provisioning-workflows/{workflowId}/executions:
     get:
       operationId: listProvisioningExecutionSummaries
@@ -624,26 +820,29 @@ paths:
         Query a list of provisioning workflow execution summaries for an
         application instance within a time range.
       tags:
-        - Provisioning Workflows
+      - Provisioning Workflows
       parameters:
-        - name: workflowId
-          in: path
-          required: true
-          description: The unique identifier of the provisioning workflow.
-          schema:
-            type: string
-        - name: startTime
-          in: query
-          description: Start time for the time range filter.
-          schema:
-            type: string
-            format: date-time
-        - name: endTime
-          in: query
-          description: End time for the time range filter.
-          schema:
-            type: string
-            format: date-time
+      - name: workflowId
+        in: path
+        required: true
+        description: The unique identifier of the provisioning workflow.
+        schema:
+          type: string
+        example: '500123'
+      - name: startTime
+        in: query
+        description: Start time for the time range filter.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: endTime
+        in: query
+        description: End time for the time range filter.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
       responses:
         '200':
           description: Execution summaries returned successfully.
@@ -674,8 +873,22 @@ paths:
                           type: string
                           format: date-time
                           description: When the execution completed.
+              examples:
+                Listprovisioningexecutionsummaries200Example:
+                  summary: Default listProvisioningExecutionSummaries 200 response
+                  x-microcks-default: true
+                  value:
+                    executions:
+                    - executionId: '500123'
+                      workflowId: '500123'
+                      status: example_value
+                      startTime: '2026-01-15T10:30:00Z'
+                      endTime: '2026-01-15T10:30:00Z'
         '401':
           description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /services/export/v1/customer/provisioning-workflows/{workflowId}/executions/{executionId}:
     get:
       operationId: getProvisioningWorkflowExecution
@@ -684,20 +897,22 @@ paths:
         Query the details of a specific provisioning workflow execution,
         including suggested or actioned outcomes for matched users.
       tags:
-        - Provisioning Workflows
+      - Provisioning Workflows
       parameters:
-        - name: workflowId
-          in: path
-          required: true
-          description: The unique identifier of the provisioning workflow.
-          schema:
-            type: string
-        - name: executionId
-          in: path
-          required: true
-          description: The unique identifier of the execution.
-          schema:
-            type: string
+      - name: workflowId
+        in: path
+        required: true
+        description: The unique identifier of the provisioning workflow.
+        schema:
+          type: string
+        example: '500123'
+      - name: executionId
+        in: path
+        required: true
+        description: The unique identifier of the execution.
+        schema:
+          type: string
+        example: '500123'
       responses:
         '200':
           description: Execution details returned successfully.
@@ -728,10 +943,25 @@ paths:
                           type: string
                         actionedOutcome:
                           type: string
+              examples:
+                Getprovisioningworkflowexecution200Example:
+                  summary: Default getProvisioningWorkflowExecution 200 response
+                  x-microcks-default: true
+                  value:
+                    executionId: '500123'
+                    workflowId: '500123'
+                    status: example_value
+                    users:
+                    - email: user@example.com
+                      suggestedOutcome: example_value
+                      actionedOutcome: example_value
         '401':
           description: Unauthorized.
         '404':
           description: Execution not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /services/export/v1/customer/audit-events:
     get:
       operationId: getAuditEvents
@@ -742,27 +972,30 @@ paths:
         If more events exist in the queried time range, the response contains
         a nextPageToken for pagination.
       tags:
-        - Audit Events
+      - Audit Events
       parameters:
-        - name: startTime
-          in: query
-          description: Start time for the query range.
-          schema:
-            type: string
-            format: date-time
-        - name: endTime
-          in: query
-          description: End time for the query range.
-          schema:
-            type: string
-            format: date-time
-        - name: nextPageToken
-          in: query
-          description: >-
-            Token for fetching the next page of results, obtained from a
-            previous response.
-          schema:
-            type: string
+      - name: startTime
+        in: query
+        description: Start time for the query range.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: endTime
+        in: query
+        description: End time for the query range.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: nextPageToken
+        in: query
+        description: >-
+          Token for fetching the next page of results, obtained from a
+          previous response.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Audit events returned successfully.
@@ -798,8 +1031,23 @@ paths:
                     description: >-
                       Token to fetch the next page of results. Absent if there
                       are no more results.
+              examples:
+                Getauditevents200Example:
+                  summary: Default getAuditEvents 200 response
+                  x-microcks-default: true
+                  value:
+                    events:
+                    - eventId: '500123'
+                      eventType: example_value
+                      timestamp: '2026-01-15T10:30:00Z'
+                      userEmail: user@example.com
+                      details: example_value
+                    nextPageToken: example_value
         '401':
           description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -819,18 +1067,23 @@ components:
         ApplicationId:
           type: string
           description: The unique identifier of the application.
+          example: '500123'
         AppName:
           type: string
           description: The name of the application.
+          example: example_value
         AppStatus:
           type: string
           description: The current status of the application.
+          example: example_value
         VendorName:
           type: string
           description: The name of the vendor.
+          example: example_value
         AppCategory:
           type: string
           description: The category of the application.
+          example: example_value
     AppDetails:
       type: object
       description: >-
@@ -841,15 +1094,19 @@ components:
         ApplicationId:
           type: string
           description: The unique identifier of the application.
+          example: '500123'
         AppName:
           type: string
           description: The name of the application.
+          example: example_value
         AppStatus:
           type: string
           description: The current status of the application.
+          example: example_value
         VendorName:
           type: string
           description: The name of the vendor.
+          example: example_value
         Instances:
           type: array
           description: Application instances.
@@ -860,6 +1117,7 @@ components:
                 type: string
               instanceName:
                 type: string
+          example: []
         Activity:
           type: object
           description: Usage activity metrics for the application.
@@ -871,6 +1129,7 @@ components:
             lastActivityDate:
               type: string
               format: date
+          example: example_value
         Contracts:
           type: array
           description: Contract details associated with the application.
@@ -887,6 +1146,7 @@ components:
                 format: date
               totalValue:
                 type: number
+          example: []
         FiscalSpend:
           type: object
           description: Fiscal spend data for the application.
@@ -895,6 +1155,7 @@ components:
               type: number
             currency:
               type: string
+          example: example_value
         Compliance:
           type: object
           description: Security standard compliance information.
@@ -903,8 +1164,10 @@ components:
               type: array
               items:
                 type: string
+          example: example_value
         SSOProtocols:
           type: array
           description: SSO protocols supported by the application.
           items:
             type: string
+          example: []

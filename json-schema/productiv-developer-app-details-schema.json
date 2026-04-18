@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AppDetails",
+  "type": "object",
+  "description": "Represents a single application with a larger set of attributes than provided in the AppSummary, including Instances, Activity, Contract, Fiscal Spend, Compliance, and SSO Protocols.",
+  "properties": {
+    "ApplicationId": {
+      "type": "string",
+      "description": "The unique identifier of the application."
+    },
+    "AppName": {
+      "type": "string",
+      "description": "The name of the application."
+    },
+    "AppStatus": {
+      "type": "string",
+      "description": "The current status of the application."
+    },
+    "VendorName": {
+      "type": "string",
+      "description": "The name of the vendor."
+    },
+    "Instances": {
+      "type": "array",
+      "description": "Application instances."
+    },
+    "Activity": {
+      "type": "object",
+      "description": "Usage activity metrics for the application."
+    },
+    "Contracts": {
+      "type": "array",
+      "description": "Contract details associated with the application."
+    },
+    "FiscalSpend": {
+      "type": "object",
+      "description": "Fiscal spend data for the application."
+    },
+    "Compliance": {
+      "type": "object",
+      "description": "Security standard compliance information."
+    },
+    "SSOProtocols": {
+      "type": "array",
+      "description": "SSO protocols supported by the application."
+    }
+  }
+}

@@ -1,0 +1,814 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Productiv Developer API"
+  description: "The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications, push usage events and user information, and export app portfolio data."
+  tags:
+    - SaaS Management
+    - Usage Analytics
+    - Provisioning
+    - Data Export
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      PRODUCTIV_CLIENT_ID: PRODUCTIV_CLIENT_ID
+      PRODUCTIV_CLIENT_SECRET: PRODUCTIV_CLIENT_SECRET
+
+capability:
+  consumes:
+    - type: http
+      namespace: productiv-developer
+      baseUri: https://public-api.productiv.com
+      description: "Productiv Developer API for SaaS management, usage analytics, and provisioning workflows."
+      authentication:
+        type: bearer
+        token: "{{PRODUCTIV_ACCESS_TOKEN}}"
+      resources:
+        - name: authentication
+          path: /oauth2
+          description: "OAuth2 authentication endpoints."
+          operations:
+            - name: get-access-token
+              method: POST
+              description: "Obtain an OAuth2 access token using client credentials."
+              inputParameters:
+                - name: grant_type
+                  in: body
+                  type: string
+                  required: true
+                  description: "The OAuth2 grant type."
+                - name: client_id
+                  in: body
+                  type: string
+                  required: true
+                  description: "Your application client ID."
+                - name: client_secret
+                  in: body
+                  type: string
+                  required: true
+                  description: "Your application client secret."
+                - name: scope
+                  in: body
+                  type: string
+                  required: false
+                  description: "Space-separated list of scopes."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  grant_type: "{{tools.grant_type}}"
+                  client_id: "{{tools.client_id}}"
+                  client_secret: "{{tools.client_secret}}"
+                  scope: "{{tools.scope}}"
+
+        - name: applications
+          path: /services/push/v1/customer/apps
+          description: "Set up and manage custom applications within Productiv."
+          operations:
+            - name: setup-application
+              method: POST
+              description: "Define and publish a new connected application to Productiv."
+              inputParameters:
+                - name: appName
+                  in: body
+                  type: string
+                  required: true
+                  description: "The name of the application to register."
+                - name: appDescription
+                  in: body
+                  type: string
+                  required: false
+                  description: "A description of the application."
+                - name: appCategory
+                  in: body
+                  type: string
+                  required: false
+                  description: "The category of the application."
+                - name: appUrl
+                  in: body
+                  type: string
+                  required: false
+                  description: "The URL of the application."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  appName: "{{tools.appName}}"
+                  appDescription: "{{tools.appDescription}}"
+                  appCategory: "{{tools.appCategory}}"
+                  appUrl: "{{tools.appUrl}}"
+
+        - name: usage-events
+          path: /services/push/v1/customer/apps/{appId}/usage-events
+          description: "Push usage events for applications."
+          operations:
+            - name: publish-usage-events
+              method: POST
+              description: "Push usage events for an application to Productiv."
+              inputParameters:
+                - name: appId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique identifier of the application."
+                - name: events
+                  in: body
+                  type: array
+                  required: true
+                  description: "A list of usage events to push."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  events: "{{tools.events}}"
+
+        - name: spend-data
+          path: /services/push/v1/customer/apps/{appId}/spend
+          description: "Push spend data for applications."
+          operations:
+            - name: publish-spend-data
+              method: POST
+              description: "Push spend data to Productiv for an application."
+              inputParameters:
+                - name: appId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique identifier of the application."
+                - name: spendData
+                  in: body
+                  type: array
+                  required: true
+                  description: "A list of spend data records."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  spendData: "{{tools.spendData}}"
+
+        - name: provisioned-users
+          path: /services/push/v1/customer/apps/{appId}/users
+          description: "Manage users provisioned to custom integrations."
+          operations:
+            - name: publish-provisioned-users
+              method: POST
+              description: "Add provisioned users for an application in Productiv."
+              inputParameters:
+                - name: appId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique identifier of the application."
+                - name: users
+                  in: body
+                  type: array
+                  required: true
+                  description: "A list of users to provision."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  users: "{{tools.users}}"
+
+            - name: get-provisioned-users
+              method: GET
+              description: "Retrieve the list of users provisioned to an application."
+              inputParameters:
+                - name: appId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique identifier of the application."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: delete-provisioned-users
+              method: DELETE
+              description: "Remove provisioned users from an application."
+              inputParameters:
+                - name: appId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique identifier of the application."
+                - name: users
+                  in: body
+                  type: array
+                  required: true
+                  description: "A list of users to remove."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  users: "{{tools.users}}"
+
+        - name: org-chart
+          path: /services/push/v1/customer/org-chart
+          description: "Publish organizational chart data."
+          operations:
+            - name: publish-org-chart
+              method: PUT
+              description: "Publish organizational chart data to Productiv."
+              inputParameters:
+                - name: users
+                  in: body
+                  type: array
+                  required: true
+                  description: "A list of users in the org chart (max 1000)."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  users: "{{tools.users}}"
+
+        - name: batch-upload
+          path: /services/push/v1/customer/apps/{appId}/upload
+          description: "Upload files in batch for applications."
+          operations:
+            - name: get-batch-upload-urls
+              method: GET
+              description: "Get signed upload URLs for batch file uploads."
+              inputParameters:
+                - name: appId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique identifier of the application."
+                - name: filenames
+                  in: query
+                  type: array
+                  required: true
+                  description: "The filenames to upload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: app-summaries
+          path: /services/export/v1/customer/app-summaries
+          description: "Query the list of apps in your company portfolio."
+          operations:
+            - name: get-app-summaries
+              method: GET
+              description: "Query the entire list of apps that are part of your company's portfolio."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: app-details
+          path: /services/export/v1/customer/app-details/{applicationId}
+          description: "Fetch detailed information about a particular app."
+          operations:
+            - name: get-app-details
+              method: GET
+              description: "Fetch detailed information about a particular app."
+              inputParameters:
+                - name: applicationId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique identifier of the application."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: provisioning-workflows
+          path: /services/export/v1/customer/provisioning-workflows
+          description: "Fetch provisioning workflows and execution details."
+          operations:
+            - name: list-provisioning-workflows
+              method: GET
+              description: "Query the entire list of provisioning workflows."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: list-provisioning-execution-summaries
+              method: GET
+              description: "Query provisioning workflow execution summaries within a time range."
+              inputParameters:
+                - name: workflowId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique identifier of the provisioning workflow."
+                - name: startTime
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start time for the time range filter."
+                - name: endTime
+                  in: query
+                  type: string
+                  required: false
+                  description: "End time for the time range filter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: get-provisioning-workflow-execution
+              method: GET
+              description: "Query the details of a specific provisioning workflow execution."
+              inputParameters:
+                - name: workflowId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique identifier of the provisioning workflow."
+                - name: executionId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique identifier of the execution."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: audit-events
+          path: /services/export/v1/customer/audit-events
+          description: "Fetch audit events for activities on the Productiv platform."
+          operations:
+            - name: get-audit-events
+              method: GET
+              description: "Fetch a stream of audit events for activities performed by users."
+              inputParameters:
+                - name: startTime
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start time for the query range."
+                - name: endTime
+                  in: query
+                  type: string
+                  required: false
+                  description: "End time for the query range."
+                - name: nextPageToken
+                  in: query
+                  type: string
+                  required: false
+                  description: "Token for fetching the next page of results."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: productiv-developer-rest
+      resources:
+        - path: /v1/token
+          name: authentication
+          description: "OAuth2 token endpoint."
+          operations:
+            - method: POST
+              name: get-access-token
+              description: "Obtain an OAuth2 access token."
+              call: "productiv-developer.get-access-token"
+              with:
+                grant_type: "rest.grant_type"
+                client_id: "rest.client_id"
+                client_secret: "rest.client_secret"
+                scope: "rest.scope"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/applications
+          name: applications
+          description: "Manage custom applications."
+          operations:
+            - method: POST
+              name: setup-application
+              description: "Register a new application."
+              call: "productiv-developer.setup-application"
+              with:
+                appName: "rest.appName"
+                appDescription: "rest.appDescription"
+                appCategory: "rest.appCategory"
+                appUrl: "rest.appUrl"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/applications/{appId}/usage-events
+          name: usage-events
+          description: "Manage usage events for applications."
+          operations:
+            - method: POST
+              name: publish-usage-events
+              description: "Push usage events for an application."
+              call: "productiv-developer.publish-usage-events"
+              with:
+                appId: "rest.appId"
+                events: "rest.events"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/applications/{appId}/spend
+          name: spend-data
+          description: "Manage spend data for applications."
+          operations:
+            - method: POST
+              name: publish-spend-data
+              description: "Push spend data for an application."
+              call: "productiv-developer.publish-spend-data"
+              with:
+                appId: "rest.appId"
+                spendData: "rest.spendData"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/applications/{appId}/users
+          name: provisioned-users
+          description: "Manage provisioned users."
+          operations:
+            - method: POST
+              name: publish-provisioned-users
+              description: "Add provisioned users for an application."
+              call: "productiv-developer.publish-provisioned-users"
+              with:
+                appId: "rest.appId"
+                users: "rest.users"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: GET
+              name: get-provisioned-users
+              description: "Retrieve provisioned users for an application."
+              call: "productiv-developer.get-provisioned-users"
+              with:
+                appId: "rest.appId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-provisioned-users
+              description: "Remove provisioned users from an application."
+              call: "productiv-developer.delete-provisioned-users"
+              with:
+                appId: "rest.appId"
+                users: "rest.users"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/org-chart
+          name: org-chart
+          description: "Manage organizational chart data."
+          operations:
+            - method: PUT
+              name: publish-org-chart
+              description: "Publish organizational chart data."
+              call: "productiv-developer.publish-org-chart"
+              with:
+                users: "rest.users"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/applications/{appId}/upload
+          name: batch-upload
+          description: "Batch file upload for applications."
+          operations:
+            - method: GET
+              name: get-batch-upload-urls
+              description: "Get signed upload URLs for batch file uploads."
+              call: "productiv-developer.get-batch-upload-urls"
+              with:
+                appId: "rest.appId"
+                filenames: "rest.filenames"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/app-summaries
+          name: app-summaries
+          description: "Query app portfolio summaries."
+          operations:
+            - method: GET
+              name: get-app-summaries
+              description: "Query all apps in your company portfolio."
+              call: "productiv-developer.get-app-summaries"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/app-details/{applicationId}
+          name: app-details
+          description: "Fetch detailed app information."
+          operations:
+            - method: GET
+              name: get-app-details
+              description: "Fetch detailed information about a particular app."
+              call: "productiv-developer.get-app-details"
+              with:
+                applicationId: "rest.applicationId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/provisioning-workflows
+          name: provisioning-workflows
+          description: "Manage provisioning workflows."
+          operations:
+            - method: GET
+              name: list-provisioning-workflows
+              description: "List all provisioning workflows."
+              call: "productiv-developer.list-provisioning-workflows"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/provisioning-workflows/{workflowId}/executions
+          name: provisioning-executions
+          description: "Query provisioning workflow executions."
+          operations:
+            - method: GET
+              name: list-provisioning-execution-summaries
+              description: "List provisioning workflow execution summaries."
+              call: "productiv-developer.list-provisioning-execution-summaries"
+              with:
+                workflowId: "rest.workflowId"
+                startTime: "rest.startTime"
+                endTime: "rest.endTime"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/provisioning-workflows/{workflowId}/executions/{executionId}
+          name: provisioning-execution-detail
+          description: "Get provisioning workflow execution details."
+          operations:
+            - method: GET
+              name: get-provisioning-workflow-execution
+              description: "Get details of a specific provisioning workflow execution."
+              call: "productiv-developer.get-provisioning-workflow-execution"
+              with:
+                workflowId: "rest.workflowId"
+                executionId: "rest.executionId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/audit-events
+          name: audit-events
+          description: "Query audit events."
+          operations:
+            - method: GET
+              name: get-audit-events
+              description: "Fetch audit events for platform activities."
+              call: "productiv-developer.get-audit-events"
+              with:
+                startTime: "rest.startTime"
+                endTime: "rest.endTime"
+                nextPageToken: "rest.nextPageToken"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: productiv-developer-mcp
+      transport: http
+      tools:
+        - name: get-access-token
+          description: "Obtain an OAuth2 access token using client credentials."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "productiv-developer.get-access-token"
+          with:
+            grant_type: "tools.grant_type"
+            client_id: "tools.client_id"
+            client_secret: "tools.client_secret"
+            scope: "tools.scope"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: setup-application
+          description: "Register a new connected application in Productiv."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "productiv-developer.setup-application"
+          with:
+            appName: "tools.appName"
+            appDescription: "tools.appDescription"
+            appCategory: "tools.appCategory"
+            appUrl: "tools.appUrl"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: publish-usage-events
+          description: "Push usage events for an application."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "productiv-developer.publish-usage-events"
+          with:
+            appId: "tools.appId"
+            events: "tools.events"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: publish-spend-data
+          description: "Push spend data for an application."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "productiv-developer.publish-spend-data"
+          with:
+            appId: "tools.appId"
+            spendData: "tools.spendData"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: publish-provisioned-users
+          description: "Add provisioned users for an application."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "productiv-developer.publish-provisioned-users"
+          with:
+            appId: "tools.appId"
+            users: "tools.users"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-provisioned-users
+          description: "Retrieve the list of users provisioned to an application."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "productiv-developer.get-provisioned-users"
+          with:
+            appId: "tools.appId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: delete-provisioned-users
+          description: "Remove provisioned users from an application."
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "productiv-developer.delete-provisioned-users"
+          with:
+            appId: "tools.appId"
+            users: "tools.users"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: publish-org-chart
+          description: "Publish organizational chart data to Productiv."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "productiv-developer.publish-org-chart"
+          with:
+            users: "tools.users"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-batch-upload-urls
+          description: "Get signed upload URLs for batch file uploads."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "productiv-developer.get-batch-upload-urls"
+          with:
+            appId: "tools.appId"
+            filenames: "tools.filenames"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-app-summaries
+          description: "Query all apps in your company portfolio."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "productiv-developer.get-app-summaries"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-app-details
+          description: "Fetch detailed information about a particular app."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "productiv-developer.get-app-details"
+          with:
+            applicationId: "tools.applicationId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-provisioning-workflows
+          description: "List all provisioning workflows."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "productiv-developer.list-provisioning-workflows"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-provisioning-execution-summaries
+          description: "List provisioning workflow execution summaries."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "productiv-developer.list-provisioning-execution-summaries"
+          with:
+            workflowId: "tools.workflowId"
+            startTime: "tools.startTime"
+            endTime: "tools.endTime"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-provisioning-workflow-execution
+          description: "Get details of a specific provisioning workflow execution."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "productiv-developer.get-provisioning-workflow-execution"
+          with:
+            workflowId: "tools.workflowId"
+            executionId: "tools.executionId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-audit-events
+          description: "Fetch audit events for platform activities."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "productiv-developer.get-audit-events"
+          with:
+            startTime: "tools.startTime"
+            endTime: "tools.endTime"
+            nextPageToken: "tools.nextPageToken"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -6,17 +6,17 @@ The SaaS Management Platform that delivers the industrys most comprehensive view
 ## Scope
 
 - **Type:** Index 
-- **Position:** Consuming 
+- **Position:** Consumer 
 - **Access:** 3rd-Party 
 
 ## Tags:
 
- - SaaS Management, Usage Analytics, Spend Management, Provisioning, Application Portfolio
+ - Application Portfolio, Provisioning, SaaS Management, Spend Management, Usage Analytics
 
 ## Timestamps
 
 - **Created:** 2025-07-11 
-- **Modified:** 2026-03-14 
+- **Modified:** 2026-04-18 
 
 ## APIs
 
@@ -25,16 +25,17 @@ The Productiv Developer APIs support integrating custom applications into the Pr
 
 **Human URL:** [https://docs.app.productiv.com/developer-api/index.html](https://docs.app.productiv.com/developer-api/index.html)
 
+**Base URL:** https://public-api.productiv.com
 
 #### Tags:
 
- - SaaS Management, Usage Analytics, Spend Data, Provisioning, Application Portfolio, Data Export, Audit Events
+ - Application Portfolio, Audit Events, Data Export, Provisioning, SaaS Management, Spend Data, Usage Analytics
 
 #### Properties
 
 - [Documentation](https://docs.app.productiv.com/developer-api/index.html)
 - [OpenAPI](openapi/productiv-developer-openapi.yml)
-- [Authorization](https://docs.app.productiv.com/developer-api/authorization.html)
+- [Authentication](https://docs.app.productiv.com/developer-api/authorization.html)
 - [GettingStarted](https://docs.app.productiv.com/developer-api/data-export-getting-started.html)
 - [JSONSchema](json-schema/application.json)
 - [JSONSchema](json-schema/app-summary.json)
@@ -50,8 +51,20 @@ The Productiv Developer APIs support integrating custom applications into the Pr
 ## Common Properties
 
 - [Documentation](https://docs.app.productiv.com/)
-- [Website](https://productiv.com/)
-- [Authorization](https://docs.app.productiv.com/developer-api/authorization.html)
+- [DeveloperPortal](https://productiv.com/)
+- [Authentication](https://docs.app.productiv.com/developer-api/authorization.html)
+
+## Capabilities
+
+| Capability | Type | APIs | Tools |
+|---|---|---|---|
+| [SaaS Management](capabilities/saas-management.yaml) | Workflow | 1 | 15 |
+
+### Shared Definitions
+
+| Definition | API |
+|---|---|
+| [developer-api](capabilities/shared/developer-api.yaml) | Productiv Developer API |
 
 ## Maintainers
 
