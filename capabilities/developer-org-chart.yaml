@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Productiv Developer API — Org Chart
+  description: 'Productiv Developer API — Org Chart. 1 operations. Lead operation: Productiv Publish Org Chart. Self-contained
+    Naftiko capability covering one Productiv business surface.'
+  tags:
+  - Productiv
+  - Org Chart
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PRODUCTIV_API_KEY: PRODUCTIV_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: developer-org-chart
+    baseUri: https://public-api.productiv.com
+    description: Productiv Developer API — Org Chart business capability. Self-contained, no shared references.
+    resources:
+    - name: services-push-v1-customer-org-chart
+      path: /services/push/v1/customer/org-chart
+      operations:
+      - name: publishorgchart
+        method: PUT
+        description: Productiv Publish Org Chart
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.PRODUCTIV_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: developer-org-chart-rest
+    port: 8080
+    description: REST adapter for Productiv Developer API — Org Chart. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/services/push/v1/customer/org-chart
+      name: services-push-v1-customer-org-chart
+      description: REST surface for services-push-v1-customer-org-chart.
+      operations:
+      - method: PUT
+        name: publishorgchart
+        description: Productiv Publish Org Chart
+        call: developer-org-chart.publishorgchart
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: developer-org-chart-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Productiv Developer API — Org Chart. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: productiv-publish-org-chart
+      description: Productiv Publish Org Chart
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: developer-org-chart.publishorgchart
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

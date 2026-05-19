@@ -1,0 +1,87 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Productiv Developer API — Spend Data
+  description: 'Productiv Developer API — Spend Data. 1 operations. Lead operation: Productiv Publish Spend Data. Self-contained
+    Naftiko capability covering one Productiv business surface.'
+  tags:
+  - Productiv
+  - Spend Data
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PRODUCTIV_API_KEY: PRODUCTIV_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: developer-spend-data
+    baseUri: https://public-api.productiv.com
+    description: Productiv Developer API — Spend Data business capability. Self-contained, no shared references.
+    resources:
+    - name: services-push-v1-customer-apps-appId-spend
+      path: /services/push/v1/customer/apps/{appId}/spend
+      operations:
+      - name: publishspenddata
+        method: POST
+        description: Productiv Publish Spend Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          description: The unique identifier of the application.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.PRODUCTIV_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: developer-spend-data-rest
+    port: 8080
+    description: REST adapter for Productiv Developer API — Spend Data. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/services/push/v1/customer/apps/{appid}/spend
+      name: services-push-v1-customer-apps-appid-spend
+      description: REST surface for services-push-v1-customer-apps-appId-spend.
+      operations:
+      - method: POST
+        name: publishspenddata
+        description: Productiv Publish Spend Data
+        call: developer-spend-data.publishspenddata
+        with:
+          appId: rest.appId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: developer-spend-data-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Productiv Developer API — Spend Data. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: productiv-publish-spend-data
+      description: Productiv Publish Spend Data
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: developer-spend-data.publishspenddata
+      with:
+        appId: tools.appId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Productiv Developer API — App Details
+  description: 'Productiv Developer API — App Details. 1 operations. Lead operation: Productiv Get App Details. Self-contained
+    Naftiko capability covering one Productiv business surface.'
+  tags:
+  - Productiv
+  - App Details
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PRODUCTIV_API_KEY: PRODUCTIV_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: developer-app-details
+    baseUri: https://public-api.productiv.com
+    description: Productiv Developer API — App Details business capability. Self-contained, no shared references.
+    resources:
+    - name: services-export-v1-customer-app-details-applicationId
+      path: /services/export/v1/customer/app-details/{applicationId}
+      operations:
+      - name: getappdetails
+        method: GET
+        description: Productiv Get App Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: applicationId
+          in: path
+          type: string
+          description: The unique identifier of the application, obtained from the App Summaries endpoint.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.PRODUCTIV_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: developer-app-details-rest
+    port: 8080
+    description: REST adapter for Productiv Developer API — App Details. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/services/export/v1/customer/app-details/{applicationid}
+      name: services-export-v1-customer-app-details-applicationid
+      description: REST surface for services-export-v1-customer-app-details-applicationId.
+      operations:
+      - method: GET
+        name: getappdetails
+        description: Productiv Get App Details
+        call: developer-app-details.getappdetails
+        with:
+          applicationId: rest.applicationId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: developer-app-details-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Productiv Developer API — App Details. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: productiv-get-app-details
+      description: Productiv Get App Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-app-details.getappdetails
+      with:
+        applicationId: tools.applicationId
+      outputParameters:
+      - type: object
+        mapping: $.

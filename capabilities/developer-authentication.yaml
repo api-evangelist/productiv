@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Productiv Developer API — Authentication
+  description: 'Productiv Developer API — Authentication. 1 operations. Lead operation: Productiv Generate Access Token. Self-contained
+    Naftiko capability covering one Productiv business surface.'
+  tags:
+  - Productiv
+  - Authentication
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PRODUCTIV_API_KEY: PRODUCTIV_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: developer-authentication
+    baseUri: https://public-api.productiv.com
+    description: Productiv Developer API — Authentication business capability. Self-contained, no shared references.
+    resources:
+    - name: oauth2-token
+      path: /oauth2/token
+      operations:
+      - name: getaccesstoken
+        method: POST
+        description: Productiv Generate Access Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.PRODUCTIV_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: developer-authentication-rest
+    port: 8080
+    description: REST adapter for Productiv Developer API — Authentication. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/oauth2/token
+      name: oauth2-token
+      description: REST surface for oauth2-token.
+      operations:
+      - method: POST
+        name: getaccesstoken
+        description: Productiv Generate Access Token
+        call: developer-authentication.getaccesstoken
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: developer-authentication-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Productiv Developer API — Authentication. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: productiv-generate-access-token
+      description: Productiv Generate Access Token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: developer-authentication.getaccesstoken
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
