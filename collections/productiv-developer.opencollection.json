@@ -1,0 +1,430 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Productiv Developer API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv Generate Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public-api.productiv.com/oauth2/token",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "grant_type",
+                  "value": ""
+                },
+                {
+                  "name": "client_id",
+                  "value": ""
+                },
+                {
+                  "name": "client_secret",
+                  "value": ""
+                },
+                {
+                  "name": "scope",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Obtain an OAuth2 access token using client credentials. The returned access token must be included as a Bearer token in the Authorization header of all subsequent API requests. Each API may require different scopes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv Set up an Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public-api.productiv.com/services/push/v1/customer/apps",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Define and publish a new connected application to Productiv. This registers the application and returns a unique appId that is used for subsequent API calls such as publishing usage events and spend data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Usage Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv Publish Usage Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public-api.productiv.com/services/push/v1/customer/apps/:appId/usage-events",
+            "params": [
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Push usage events for an application to Productiv. Usage events represent actions performed by users, such as starting a video call, sending messages, or uploading files. Every event is uniquely identified by the combination of timestamp, email, and eventName. A maximum of 1000 events can be pushed per request."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Spend Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv Publish Spend Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public-api.productiv.com/services/push/v1/customer/apps/:appId/spend",
+            "params": [
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Push spend data to Productiv for an application from one or more existing systems. Before using this API, the application must be set up and a unique appId obtained."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Provisioned Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv Get Provisioned Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.productiv.com/services/push/v1/customer/apps/:appId/users",
+            "params": [
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the application."
+              }
+            ]
+          },
+          "docs": "Retrieve the list of users provisioned to an application."
+        },
+        {
+          "info": {
+            "name": "Productiv Publish Provisioned Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public-api.productiv.com/services/push/v1/customer/apps/:appId/users",
+            "params": [
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add provisioned users for an application in Productiv. Productiv treats the set of provisioned users updated by the developer APIs as the current list of all users for the application."
+        },
+        {
+          "info": {
+            "name": "Productiv Delete Provisioned Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://public-api.productiv.com/services/push/v1/customer/apps/:appId/users",
+            "params": [
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove provisioned users from an application in Productiv."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Org Chart",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv Publish Org Chart",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://public-api.productiv.com/services/push/v1/customer/org-chart",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publish organizational chart data to Productiv. The endpoint accepts no more than 1000 users per request. Multiple PUT requests to the same resource ID are required if more than 1000 users need to be added."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Batch Upload",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv Get Batch File Upload Urls",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.productiv.com/services/push/v1/customer/apps/:appId/upload",
+            "params": [
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the application."
+              },
+              {
+                "name": "filenames",
+                "value": "",
+                "type": "query",
+                "description": "The filenames to upload. Can be specified multiple times."
+              }
+            ]
+          },
+          "docs": "Get signed upload URLs for batch file uploads. Specify the filenames to upload as query parameters, and the response will return signed URLs for each file. Use the returned signed URLs to PUT each file."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "App Summaries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv Get App Summaries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.productiv.com/services/export/v1/customer/app-summaries"
+          },
+          "docs": "Query the entire list of apps that are part of your company's portfolio. Returns a small set of app attributes such as ApplicationId, AppStatus, and VendorName. For more detailed information about a particular app, use the App Details endpoint with the ApplicationId. Rate limit is 20 requests per second."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "App Details",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv Get App Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.productiv.com/services/export/v1/customer/app-details/:applicationId",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the application, obtained from the App Summaries endpoint."
+              }
+            ]
+          },
+          "docs": "Fetch detailed information about a particular app that is not provided in the App Summaries response. Additional details include Instances, Activity, Contract, Fiscal Spend, Compliance, and SSO Protocols. Rate limit is 20 requests per second."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Provisioning Workflows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv List Provisioning Workflows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.productiv.com/services/export/v1/customer/provisioning-workflows"
+          },
+          "docs": "Query the entire list of provisioning workflows configured on your account. Rate limit is 20 requests per second."
+        },
+        {
+          "info": {
+            "name": "Productiv List Provisioning Execution Summaries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.productiv.com/services/export/v1/customer/provisioning-workflows/:workflowId/executions",
+            "params": [
+              {
+                "name": "workflowId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the provisioning workflow."
+              },
+              {
+                "name": "startTime",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "Start time for the time range filter."
+              },
+              {
+                "name": "endTime",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "End time for the time range filter."
+              }
+            ]
+          },
+          "docs": "Query a list of provisioning workflow execution summaries for an application instance within a time range."
+        },
+        {
+          "info": {
+            "name": "Productiv Get Provisioning Workflow Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.productiv.com/services/export/v1/customer/provisioning-workflows/:workflowId/executions/:executionId",
+            "params": [
+              {
+                "name": "workflowId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the provisioning workflow."
+              },
+              {
+                "name": "executionId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the execution."
+              }
+            ]
+          },
+          "docs": "Query the details of a specific provisioning workflow execution, including suggested or actioned outcomes for matched users."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Audit Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv Get Audit Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.productiv.com/services/export/v1/customer/audit-events",
+            "params": [
+              {
+                "name": "startTime",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "Start time for the query range."
+              },
+              {
+                "name": "endTime",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "End time for the query range."
+              },
+              {
+                "name": "nextPageToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "Token for fetching the next page of results, obtained from a previous response."
+              }
+            ]
+          },
+          "docs": "Fetch a stream of audit events for activities performed by users on the Productiv platform. Each request returns a maximum of 500 events. If more events exist in the queried time range, the response contains a nextPageToken for pagination."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
