@@ -64,6 +64,12 @@ apis:
       - type: JSONLD
         url: json-ld/productiv-context.jsonld
 common:
+  - type: TrustCenter
+    url: security/productiv-trust-center.yml
+  - type: DomainSecurity
+    url: security/productiv-domain-security.yml
+  - type: Authentication
+    url: authentication/productiv-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/BeProductiv
   - type: LinkedIn
@@ -119,6 +125,8 @@ common:
     type: Capabilities
   - url: capabilities/saas-management.yaml
     type: Capabilities
+  - url: https://productiv.com/blog
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

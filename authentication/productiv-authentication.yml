@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/productiv-developer-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: OAuth2
+  description: Bearer token obtained from the OAuth2 token endpoint at https://login.api.productiv.com/oauth2/token
+    using client credentials grant type.
+  sources:
+  - openapi/productiv-developer-openapi.yml
