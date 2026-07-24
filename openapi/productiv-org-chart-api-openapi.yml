@@ -1,0 +1,110 @@
+openapi: 3.1.0
+info:
+  title: Productiv Developer App Details Org Chart API
+  description: The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.
+  version: v1
+  contact:
+    name: Productiv Support
+    email: support@productiv.com
+    url: https://productiv.com/
+  license:
+    name: Proprietary
+    url: https://productiv.com/
+servers:
+- url: https://public-api.productiv.com
+  description: Productiv Public API
+- url: https://login.api.productiv.com
+  description: Productiv OAuth2 Authorization Server
+security:
+- bearerAuth: []
+tags:
+- name: Org Chart
+  description: Publish organizational chart data.
+paths:
+  /services/push/v1/customer/org-chart:
+    put:
+      operationId: publishOrgChart
+      summary: Productiv Publish Org Chart
+      description: Publish organizational chart data to Productiv. The endpoint accepts no more than 1000 users per request. Multiple PUT requests to the same resource ID are required if more than 1000 users need to be added.
+      tags:
+      - Org Chart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                users:
+                  type: array
+                  maxItems: 1000
+                  description: A list of users in the org chart.
+                  items:
+                    type: object
+                    required:
+                    - email
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                        description: The email address of the user.
+                      firstName:
+                        type: string
+                        description: First name of the user.
+                      lastName:
+                        type: string
+                        description: Last name of the user.
+                      managerEmail:
+                        type: string
+                        format: email
+                        description: The email address of the user's manager.
+                      department:
+                        type: string
+                        description: The department of the user.
+                      title:
+                        type: string
+                        description: The job title of the user.
+                customFieldsConfig:
+                  type: array
+                  description: Custom field definitions such as Date of Birth, Director, VP, Entity, and Business Unit.
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: The name of the custom field.
+                      type:
+                        type: string
+                        description: The data type of the custom field.
+            examples:
+              PublishorgchartRequestExample:
+                summary: Default publishOrgChart request
+                x-microcks-default: true
+                value:
+                  users:
+                  - email: user@example.com
+                    firstName: example_value
+                    lastName: example_value
+                    managerEmail: user@example.com
+                    department: example_value
+                    title: Example Title
+                  customFieldsConfig:
+                  - name: Example Title
+                    type: example_value
+      responses:
+        '200':
+          description: Org chart published successfully.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth2
+      description: Bearer token obtained from the OAuth2 token endpoint at https://login.api.productiv.com/oauth2/token using client credentials grant type.

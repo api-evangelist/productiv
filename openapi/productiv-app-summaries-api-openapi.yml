@@ -1,0 +1,90 @@
+openapi: 3.1.0
+info:
+  title: Productiv Developer App Details App Summaries API
+  description: The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.
+  version: v1
+  contact:
+    name: Productiv Support
+    email: support@productiv.com
+    url: https://productiv.com/
+  license:
+    name: Proprietary
+    url: https://productiv.com/
+servers:
+- url: https://public-api.productiv.com
+  description: Productiv Public API
+- url: https://login.api.productiv.com
+  description: Productiv OAuth2 Authorization Server
+security:
+- bearerAuth: []
+tags:
+- name: App Summaries
+  description: Query the list of apps in your company portfolio.
+paths:
+  /services/export/v1/customer/app-summaries:
+    get:
+      operationId: getAppSummaries
+      summary: Productiv Get App Summaries
+      description: Query the entire list of apps that are part of your company's portfolio. Returns a small set of app attributes such as ApplicationId, AppStatus, and VendorName. For more detailed information about a particular app, use the App Details endpoint with the ApplicationId. Rate limit is 20 requests per second.
+      tags:
+      - App Summaries
+      responses:
+        '200':
+          description: App summaries returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  apps:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AppSummary'
+              examples:
+                Getappsummaries200Example:
+                  summary: Default getAppSummaries 200 response
+                  x-microcks-default: true
+                  value:
+                    apps:
+                    - ApplicationId: '500123'
+                      AppName: example_value
+                      AppStatus: example_value
+                      VendorName: example_value
+                      AppCategory: example_value
+        '401':
+          description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AppSummary:
+      type: object
+      description: Represents a single application with a limited set of attributes.
+      properties:
+        ApplicationId:
+          type: string
+          description: The unique identifier of the application.
+          example: '500123'
+        AppName:
+          type: string
+          description: The name of the application.
+          example: example_value
+        AppStatus:
+          type: string
+          description: The current status of the application.
+          example: example_value
+        VendorName:
+          type: string
+          description: The name of the vendor.
+          example: example_value
+        AppCategory:
+          type: string
+          description: The category of the application.
+          example: example_value
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth2
+      description: Bearer token obtained from the OAuth2 token endpoint at https://login.api.productiv.com/oauth2/token using client credentials grant type.

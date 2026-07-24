@@ -1,0 +1,202 @@
+openapi: 3.1.0
+info:
+  title: Productiv Developer App Details Provisioned Users API
+  description: The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.
+  version: v1
+  contact:
+    name: Productiv Support
+    email: support@productiv.com
+    url: https://productiv.com/
+  license:
+    name: Proprietary
+    url: https://productiv.com/
+servers:
+- url: https://public-api.productiv.com
+  description: Productiv Public API
+- url: https://login.api.productiv.com
+  description: Productiv OAuth2 Authorization Server
+security:
+- bearerAuth: []
+tags:
+- name: Provisioned Users
+  description: Manage users provisioned to custom integrations.
+paths:
+  /services/push/v1/customer/apps/{appId}/users:
+    post:
+      operationId: publishProvisionedUsers
+      summary: Productiv Publish Provisioned Users
+      description: Add provisioned users for an application in Productiv. Productiv treats the set of provisioned users updated by the developer APIs as the current list of all users for the application.
+      tags:
+      - Provisioned Users
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        description: The unique identifier of the application.
+        schema:
+          type: string
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - users
+              properties:
+                users:
+                  type: array
+                  description: A list of users to provision.
+                  items:
+                    type: object
+                    required:
+                    - email
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                        description: The email address of the user.
+                      firstName:
+                        type: string
+                        description: The first name of the user.
+                      lastName:
+                        type: string
+                        description: The last name of the user.
+                      role:
+                        type: string
+                        description: The role of the user in the application.
+            examples:
+              PublishprovisionedusersRequestExample:
+                summary: Default publishProvisionedUsers request
+                x-microcks-default: true
+                value:
+                  users:
+                  - email: user@example.com
+                    firstName: example_value
+                    lastName: example_value
+                    role: example_value
+      responses:
+        '200':
+          description: Provisioned users published successfully.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: getProvisionedUsers
+      summary: Productiv Get Provisioned Users
+      description: Retrieve the list of users provisioned to an application.
+      tags:
+      - Provisioned Users
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        description: The unique identifier of the application.
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: Provisioned users retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        email:
+                          type: string
+                          format: email
+                          description: The email address of the user.
+                        firstName:
+                          type: string
+                          description: The first name of the user.
+                        lastName:
+                          type: string
+                          description: The last name of the user.
+                        role:
+                          type: string
+                          description: The role of the user.
+              examples:
+                Getprovisionedusers200Example:
+                  summary: Default getProvisionedUsers 200 response
+                  x-microcks-default: true
+                  value:
+                    users:
+                    - email: user@example.com
+                      firstName: example_value
+                      lastName: example_value
+                      role: example_value
+        '401':
+          description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteProvisionedUsers
+      summary: Productiv Delete Provisioned Users
+      description: Remove provisioned users from an application in Productiv.
+      tags:
+      - Provisioned Users
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        description: The unique identifier of the application.
+        schema:
+          type: string
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - users
+              properties:
+                users:
+                  type: array
+                  description: A list of users to remove.
+                  items:
+                    type: object
+                    required:
+                    - email
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                        description: The email address of the user to remove.
+            examples:
+              DeleteprovisionedusersRequestExample:
+                summary: Default deleteProvisionedUsers request
+                x-microcks-default: true
+                value:
+                  users:
+                  - email: user@example.com
+      responses:
+        '200':
+          description: Provisioned users removed successfully.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth2
+      description: Bearer token obtained from the OAuth2 token endpoint at https://login.api.productiv.com/oauth2/token using client credentials grant type.

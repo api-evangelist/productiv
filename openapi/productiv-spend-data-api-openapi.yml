@@ -1,0 +1,91 @@
+openapi: 3.1.0
+info:
+  title: Productiv Developer App Details Spend Data API
+  description: The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.
+  version: v1
+  contact:
+    name: Productiv Support
+    email: support@productiv.com
+    url: https://productiv.com/
+  license:
+    name: Proprietary
+    url: https://productiv.com/
+servers:
+- url: https://public-api.productiv.com
+  description: Productiv Public API
+- url: https://login.api.productiv.com
+  description: Productiv OAuth2 Authorization Server
+security:
+- bearerAuth: []
+tags:
+- name: Spend Data
+  description: Publish spend data for applications.
+paths:
+  /services/push/v1/customer/apps/{appId}/spend:
+    post:
+      operationId: publishSpendData
+      summary: Productiv Publish Spend Data
+      description: Push spend data to Productiv for an application from one or more existing systems. Before using this API, the application must be set up and a unique appId obtained.
+      tags:
+      - Spend Data
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        description: The unique identifier of the application.
+        schema:
+          type: string
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                spendData:
+                  type: array
+                  description: A list of spend data records.
+                  items:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                        description: The spend amount.
+                      currency:
+                        type: string
+                        description: The currency code.
+                      date:
+                        type: string
+                        format: date
+                        description: The date of the spend.
+                      description:
+                        type: string
+                        description: A description of the spend.
+            examples:
+              PublishspenddataRequestExample:
+                summary: Default publishSpendData request
+                x-microcks-default: true
+                value:
+                  spendData:
+                  - amount: 42.5
+                    currency: example_value
+                    date: '2026-01-15'
+                    description: A sample description.
+      responses:
+        '200':
+          description: Spend data published successfully.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth2
+      description: Bearer token obtained from the OAuth2 token endpoint at https://login.api.productiv.com/oauth2/token using client credentials grant type.

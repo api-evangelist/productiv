@@ -1,0 +1,96 @@
+openapi: 3.1.0
+info:
+  title: Productiv Developer App Details Applications API
+  description: The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.
+  version: v1
+  contact:
+    name: Productiv Support
+    email: support@productiv.com
+    url: https://productiv.com/
+  license:
+    name: Proprietary
+    url: https://productiv.com/
+servers:
+- url: https://public-api.productiv.com
+  description: Productiv Public API
+- url: https://login.api.productiv.com
+  description: Productiv OAuth2 Authorization Server
+security:
+- bearerAuth: []
+tags:
+- name: Applications
+  description: Set up and manage custom applications within Productiv.
+paths:
+  /services/push/v1/customer/apps:
+    post:
+      operationId: setupApplication
+      summary: Productiv Set up an Application
+      description: Define and publish a new connected application to Productiv. This registers the application and returns a unique appId that is used for subsequent API calls such as publishing usage events and spend data.
+      tags:
+      - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - appName
+              properties:
+                appName:
+                  type: string
+                  description: The name of the application to register.
+                appDescription:
+                  type: string
+                  description: A description of the application.
+                appCategory:
+                  type: string
+                  description: The category of the application.
+                appUrl:
+                  type: string
+                  format: uri
+                  description: The URL of the application.
+            examples:
+              SetupapplicationRequestExample:
+                summary: Default setupApplication request
+                x-microcks-default: true
+                value:
+                  appName: example_value
+                  appDescription: example_value
+                  appCategory: example_value
+                  appUrl: https://www.example.com
+      responses:
+        '200':
+          description: Application created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appId:
+                    type: string
+                    description: The unique identifier for the created application.
+                  appName:
+                    type: string
+                    description: The name of the application.
+              examples:
+                Setupapplication200Example:
+                  summary: Default setupApplication 200 response
+                  x-microcks-default: true
+                  value:
+                    appId: '500123'
+                    appName: example_value
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth2
+      description: Bearer token obtained from the OAuth2 token endpoint at https://login.api.productiv.com/oauth2/token using client credentials grant type.

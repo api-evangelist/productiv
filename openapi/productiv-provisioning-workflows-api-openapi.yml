@@ -1,0 +1,223 @@
+openapi: 3.1.0
+info:
+  title: Productiv Developer App Details Provisioning Workflows API
+  description: The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.
+  version: v1
+  contact:
+    name: Productiv Support
+    email: support@productiv.com
+    url: https://productiv.com/
+  license:
+    name: Proprietary
+    url: https://productiv.com/
+servers:
+- url: https://public-api.productiv.com
+  description: Productiv Public API
+- url: https://login.api.productiv.com
+  description: Productiv OAuth2 Authorization Server
+security:
+- bearerAuth: []
+tags:
+- name: Provisioning Workflows
+  description: Fetch provisioning workflows and execution details.
+paths:
+  /services/export/v1/customer/provisioning-workflows:
+    get:
+      operationId: listProvisioningWorkflows
+      summary: Productiv List Provisioning Workflows
+      description: Query the entire list of provisioning workflows configured on your account. Rate limit is 20 requests per second.
+      tags:
+      - Provisioning Workflows
+      responses:
+        '200':
+          description: Provisioning workflows returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  workflows:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        workflowId:
+                          type: string
+                          description: The unique identifier of the workflow.
+                        workflowName:
+                          type: string
+                          description: The name of the workflow.
+                        applicationId:
+                          type: string
+                          description: The application associated with the workflow.
+                        status:
+                          type: string
+                          description: The status of the workflow.
+              examples:
+                Listprovisioningworkflows200Example:
+                  summary: Default listProvisioningWorkflows 200 response
+                  x-microcks-default: true
+                  value:
+                    workflows:
+                    - workflowId: '500123'
+                      workflowName: example_value
+                      applicationId: '500123'
+                      status: example_value
+        '401':
+          description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /services/export/v1/customer/provisioning-workflows/{workflowId}/executions:
+    get:
+      operationId: listProvisioningExecutionSummaries
+      summary: Productiv List Provisioning Execution Summaries
+      description: Query a list of provisioning workflow execution summaries for an application instance within a time range.
+      tags:
+      - Provisioning Workflows
+      parameters:
+      - name: workflowId
+        in: path
+        required: true
+        description: The unique identifier of the provisioning workflow.
+        schema:
+          type: string
+        example: '500123'
+      - name: startTime
+        in: query
+        description: Start time for the time range filter.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: endTime
+        in: query
+        description: End time for the time range filter.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      responses:
+        '200':
+          description: Execution summaries returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  executions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        executionId:
+                          type: string
+                          description: The unique identifier of the execution.
+                        workflowId:
+                          type: string
+                          description: The workflow identifier.
+                        status:
+                          type: string
+                          description: The status of the execution.
+                        startTime:
+                          type: string
+                          format: date-time
+                          description: When the execution started.
+                        endTime:
+                          type: string
+                          format: date-time
+                          description: When the execution completed.
+              examples:
+                Listprovisioningexecutionsummaries200Example:
+                  summary: Default listProvisioningExecutionSummaries 200 response
+                  x-microcks-default: true
+                  value:
+                    executions:
+                    - executionId: '500123'
+                      workflowId: '500123'
+                      status: example_value
+                      startTime: '2026-01-15T10:30:00Z'
+                      endTime: '2026-01-15T10:30:00Z'
+        '401':
+          description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /services/export/v1/customer/provisioning-workflows/{workflowId}/executions/{executionId}:
+    get:
+      operationId: getProvisioningWorkflowExecution
+      summary: Productiv Get Provisioning Workflow Execution
+      description: Query the details of a specific provisioning workflow execution, including suggested or actioned outcomes for matched users.
+      tags:
+      - Provisioning Workflows
+      parameters:
+      - name: workflowId
+        in: path
+        required: true
+        description: The unique identifier of the provisioning workflow.
+        schema:
+          type: string
+        example: '500123'
+      - name: executionId
+        in: path
+        required: true
+        description: The unique identifier of the execution.
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: Execution details returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  executionId:
+                    type: string
+                    description: The unique identifier of the execution.
+                  workflowId:
+                    type: string
+                    description: The workflow identifier.
+                  status:
+                    type: string
+                    description: The status of the execution.
+                  users:
+                    type: array
+                    description: Users affected by the execution.
+                    items:
+                      type: object
+                      properties:
+                        email:
+                          type: string
+                          format: email
+                        suggestedOutcome:
+                          type: string
+                        actionedOutcome:
+                          type: string
+              examples:
+                Getprovisioningworkflowexecution200Example:
+                  summary: Default getProvisioningWorkflowExecution 200 response
+                  x-microcks-default: true
+                  value:
+                    executionId: '500123'
+                    workflowId: '500123'
+                    status: example_value
+                    users:
+                    - email: user@example.com
+                      suggestedOutcome: example_value
+                      actionedOutcome: example_value
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Execution not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth2
+      description: Bearer token obtained from the OAuth2 token endpoint at https://login.api.productiv.com/oauth2/token using client credentials grant type.

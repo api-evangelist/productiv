@@ -1,0 +1,173 @@
+openapi: 3.1.0
+info:
+  title: Productiv Developer App Details API
+  description: The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.
+  version: v1
+  contact:
+    name: Productiv Support
+    email: support@productiv.com
+    url: https://productiv.com/
+  license:
+    name: Proprietary
+    url: https://productiv.com/
+servers:
+- url: https://public-api.productiv.com
+  description: Productiv Public API
+- url: https://login.api.productiv.com
+  description: Productiv OAuth2 Authorization Server
+security:
+- bearerAuth: []
+tags:
+- name: App Details
+  description: Fetch detailed information about a particular app.
+paths:
+  /services/export/v1/customer/app-details/{applicationId}:
+    get:
+      operationId: getAppDetails
+      summary: Productiv Get App Details
+      description: Fetch detailed information about a particular app that is not provided in the App Summaries response. Additional details include Instances, Activity, Contract, Fiscal Spend, Compliance, and SSO Protocols. Rate limit is 20 requests per second.
+      tags:
+      - App Details
+      parameters:
+      - name: applicationId
+        in: path
+        required: true
+        description: The unique identifier of the application, obtained from the App Summaries endpoint.
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: App details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppDetails'
+              examples:
+                Getappdetails200Example:
+                  summary: Default getAppDetails 200 response
+                  x-microcks-default: true
+                  value:
+                    ApplicationId: '500123'
+                    AppName: example_value
+                    AppStatus: example_value
+                    VendorName: example_value
+                    Instances:
+                    - instanceId: '500123'
+                      instanceName: example_value
+                    Activity:
+                      totalUsers: 10
+                      activeUsers: 10
+                      lastActivityDate: '2026-01-15'
+                    Contracts:
+                    - contractId: '500123'
+                      startDate: '2026-01-15'
+                      endDate: '2026-01-15'
+                      totalValue: 42.5
+                    FiscalSpend:
+                      totalSpend: 42.5
+                      currency: example_value
+                    Compliance:
+                      standards:
+                      - example_value
+                    SSOProtocols:
+                    - example_value
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Application not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AppDetails:
+      type: object
+      description: Represents a single application with a larger set of attributes than provided in the AppSummary, including Instances, Activity, Contract, Fiscal Spend, Compliance, and SSO Protocols.
+      properties:
+        ApplicationId:
+          type: string
+          description: The unique identifier of the application.
+          example: '500123'
+        AppName:
+          type: string
+          description: The name of the application.
+          example: example_value
+        AppStatus:
+          type: string
+          description: The current status of the application.
+          example: example_value
+        VendorName:
+          type: string
+          description: The name of the vendor.
+          example: example_value
+        Instances:
+          type: array
+          description: Application instances.
+          items:
+            type: object
+            properties:
+              instanceId:
+                type: string
+              instanceName:
+                type: string
+          example: []
+        Activity:
+          type: object
+          description: Usage activity metrics for the application.
+          properties:
+            totalUsers:
+              type: integer
+            activeUsers:
+              type: integer
+            lastActivityDate:
+              type: string
+              format: date
+          example: example_value
+        Contracts:
+          type: array
+          description: Contract details associated with the application.
+          items:
+            type: object
+            properties:
+              contractId:
+                type: string
+              startDate:
+                type: string
+                format: date
+              endDate:
+                type: string
+                format: date
+              totalValue:
+                type: number
+          example: []
+        FiscalSpend:
+          type: object
+          description: Fiscal spend data for the application.
+          properties:
+            totalSpend:
+              type: number
+            currency:
+              type: string
+          example: example_value
+        Compliance:
+          type: object
+          description: Security standard compliance information.
+          properties:
+            standards:
+              type: array
+              items:
+                type: string
+          example: example_value
+        SSOProtocols:
+          type: array
+          description: SSO protocols supported by the application.
+          items:
+            type: string
+          example: []
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth2
+      description: Bearer token obtained from the OAuth2 token endpoint at https://login.api.productiv.com/oauth2/token using client credentials grant type.

@@ -1,0 +1,108 @@
+openapi: 3.1.0
+info:
+  title: Productiv Developer App Details Audit Events API
+  description: The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.
+  version: v1
+  contact:
+    name: Productiv Support
+    email: support@productiv.com
+    url: https://productiv.com/
+  license:
+    name: Proprietary
+    url: https://productiv.com/
+servers:
+- url: https://public-api.productiv.com
+  description: Productiv Public API
+- url: https://login.api.productiv.com
+  description: Productiv OAuth2 Authorization Server
+security:
+- bearerAuth: []
+tags:
+- name: Audit Events
+  description: Fetch audit events for activities performed on the Productiv platform.
+paths:
+  /services/export/v1/customer/audit-events:
+    get:
+      operationId: getAuditEvents
+      summary: Productiv Get Audit Events
+      description: Fetch a stream of audit events for activities performed by users on the Productiv platform. Each request returns a maximum of 500 events. If more events exist in the queried time range, the response contains a nextPageToken for pagination.
+      tags:
+      - Audit Events
+      parameters:
+      - name: startTime
+        in: query
+        description: Start time for the query range.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: endTime
+        in: query
+        description: End time for the query range.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: nextPageToken
+        in: query
+        description: Token for fetching the next page of results, obtained from a previous response.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Audit events returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  events:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        eventId:
+                          type: string
+                          description: The unique identifier of the event.
+                        eventType:
+                          type: string
+                          description: The type of audit event.
+                        timestamp:
+                          type: string
+                          format: date-time
+                          description: When the event occurred.
+                        userEmail:
+                          type: string
+                          format: email
+                          description: The email of the user who performed the action.
+                        details:
+                          type: object
+                          description: Additional details about the event.
+                  nextPageToken:
+                    type: string
+                    description: Token to fetch the next page of results. Absent if there are no more results.
+              examples:
+                Getauditevents200Example:
+                  summary: Default getAuditEvents 200 response
+                  x-microcks-default: true
+                  value:
+                    events:
+                    - eventId: '500123'
+                      eventType: example_value
+                      timestamp: '2026-01-15T10:30:00Z'
+                      userEmail: user@example.com
+                      details: example_value
+                    nextPageToken: example_value
+        '401':
+          description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth2
+      description: Bearer token obtained from the OAuth2 token endpoint at https://login.api.productiv.com/oauth2/token using client credentials grant type.

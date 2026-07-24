@@ -1,0 +1,105 @@
+openapi: 3.1.0
+info:
+  title: Productiv Developer App Details Authentication API
+  description: The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.
+  version: v1
+  contact:
+    name: Productiv Support
+    email: support@productiv.com
+    url: https://productiv.com/
+  license:
+    name: Proprietary
+    url: https://productiv.com/
+servers:
+- url: https://public-api.productiv.com
+  description: Productiv Public API
+- url: https://login.api.productiv.com
+  description: Productiv OAuth2 Authorization Server
+security:
+- bearerAuth: []
+tags:
+- name: Authentication
+  description: OAuth2 token endpoint for obtaining access tokens.
+paths:
+  /oauth2/token:
+    post:
+      operationId: getAccessToken
+      summary: Productiv Generate Access Token
+      description: Obtain an OAuth2 access token using client credentials. The returned access token must be included as a Bearer token in the Authorization header of all subsequent API requests. Each API may require different scopes.
+      tags:
+      - Authentication
+      security: []
+      servers:
+      - url: https://login.api.productiv.com
+        description: Productiv OAuth2 Authorization Server
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - grant_type
+              - client_id
+              - client_secret
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                  - client_credentials
+                  description: The OAuth2 grant type.
+                client_id:
+                  type: string
+                  description: Your application client ID.
+                client_secret:
+                  type: string
+                  description: Your application client secret.
+                scope:
+                  type: string
+                  description: Space-separated list of scopes. Available scopes include https://api.productiv.com/connector.write and https://api.productiv.com/report.read.
+            examples:
+              GetaccesstokenRequestExample:
+                summary: Default getAccessToken request
+                x-microcks-default: true
+                value:
+                  grant_type: client_credentials
+                  client_id: '500123'
+                  client_secret: example_value
+                  scope: example_value
+      responses:
+        '200':
+          description: Successful token response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: The access token to use for API requests.
+                  token_type:
+                    type: string
+                    description: The type of the token, typically Bearer.
+                  expires_in:
+                    type: integer
+                    description: The number of seconds until the token expires.
+              examples:
+                Getaccesstoken200Example:
+                  summary: Default getAccessToken 200 response
+                  x-microcks-default: true
+                  value:
+                    access_token: example_value
+                    token_type: example_value
+                    expires_in: 10
+        '401':
+          description: Invalid client credentials.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth2
+      description: Bearer token obtained from the OAuth2 token endpoint at https://login.api.productiv.com/oauth2/token using client credentials grant type.

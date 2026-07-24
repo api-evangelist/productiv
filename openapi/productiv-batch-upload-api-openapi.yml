@@ -1,0 +1,90 @@
+openapi: 3.1.0
+info:
+  title: Productiv Developer App Details Batch Upload API
+  description: The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.
+  version: v1
+  contact:
+    name: Productiv Support
+    email: support@productiv.com
+    url: https://productiv.com/
+  license:
+    name: Proprietary
+    url: https://productiv.com/
+servers:
+- url: https://public-api.productiv.com
+  description: Productiv Public API
+- url: https://login.api.productiv.com
+  description: Productiv OAuth2 Authorization Server
+security:
+- bearerAuth: []
+tags:
+- name: Batch Upload
+  description: Upload files in batch for applications.
+paths:
+  /services/push/v1/customer/apps/{appId}/upload:
+    get:
+      operationId: getBatchUploadUrls
+      summary: Productiv Get Batch File Upload Urls
+      description: Get signed upload URLs for batch file uploads. Specify the filenames to upload as query parameters, and the response will return signed URLs for each file. Use the returned signed URLs to PUT each file.
+      tags:
+      - Batch Upload
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        description: The unique identifier of the application.
+        schema:
+          type: string
+        example: '500123'
+      - name: filenames
+        in: query
+        required: true
+        description: The filenames to upload. Can be specified multiple times.
+        schema:
+          type: array
+          items:
+            type: string
+        explode: true
+        example: []
+      responses:
+        '200':
+          description: Signed upload URLs returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uploadUrls:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        filename:
+                          type: string
+                          description: The filename.
+                        uploadUrl:
+                          type: string
+                          format: uri
+                          description: The signed URL to upload the file to.
+              examples:
+                Getbatchuploadurls200Example:
+                  summary: Default getBatchUploadUrls 200 response
+                  x-microcks-default: true
+                  value:
+                    uploadUrls:
+                    - filename: example_value
+                      uploadUrl: https://www.example.com
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth2
+      description: Bearer token obtained from the OAuth2 token endpoint at https://login.api.productiv.com/oauth2/token using client credentials grant type.
