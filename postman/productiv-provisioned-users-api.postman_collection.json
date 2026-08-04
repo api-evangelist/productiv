@@ -1,0 +1,693 @@
+{
+  "info": {
+    "_postman_id": "934b6e27-fcae-4a8d-acdf-8fa0ff0e1f4f",
+    "name": "Productiv Developer App Details Provisioned Users API",
+    "description": "The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.\n\nContact Support:\n Name: Productiv Support\n Email: support@productiv.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:40:56.000Z",
+    "updatedAt": "2026-07-28T02:40:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-934b6e27-fcae-4a8d-acdf-8fa0ff0e1f4f"
+  },
+  "item": [
+    {
+      "name": "services",
+      "item": [
+        {
+          "name": "push",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "customer",
+                  "item": [
+                    {
+                      "name": "apps",
+                      "item": [
+                        {
+                          "name": "{appId}",
+                          "item": [
+                            {
+                              "name": "users",
+                              "item": [
+                                {
+                                  "name": "Productiv Publish Provisioned Users",
+                                  "id": "226b148f-8602-465b-b1ab-6f3d27bbab04",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"users\": [\n    {\n      \"email\": \"<email>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"role\": \"<string>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"role\": \"<string>\"\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/users",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "services",
+                                        "push",
+                                        "v1",
+                                        "customer",
+                                        "apps",
+                                        ":appId",
+                                        "users"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "ab98f9e3-207e-497e-b86a-c61d72926505",
+                                          "key": "appId",
+                                          "value": "<string>",
+                                          "description": "(Required) The unique identifier of the application."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Add provisioned users for an application in Productiv. Productiv treats the set of provisioned users updated by the developer APIs as the current list of all users for the application."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "cb503d5e-9eb5-4662-9424-7ee85548c94f",
+                                      "name": "Provisioned users published successfully.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"users\": [\n    {\n      \"email\": \"<email>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"role\": \"<string>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"role\": \"<string>\"\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/users",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "push",
+                                            "v1",
+                                            "customer",
+                                            "apps",
+                                            ":appId",
+                                            "users"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "appId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:40:57.000Z",
+                                      "updatedAt": "2026-07-28T02:40:57.000Z",
+                                      "uid": "35240-cb503d5e-9eb5-4662-9424-7ee85548c94f"
+                                    },
+                                    {
+                                      "id": "64e307e2-e2ee-471b-bc22-8c8946eb8cbc",
+                                      "name": "Bad request.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"users\": [\n    {\n      \"email\": \"<email>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"role\": \"<string>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"role\": \"<string>\"\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/users",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "push",
+                                            "v1",
+                                            "customer",
+                                            "apps",
+                                            ":appId",
+                                            "users"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "appId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Bad Request",
+                                      "code": 400,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:40:57.000Z",
+                                      "updatedAt": "2026-07-28T02:40:57.000Z",
+                                      "uid": "35240-64e307e2-e2ee-471b-bc22-8c8946eb8cbc"
+                                    },
+                                    {
+                                      "id": "cc9def5d-6c22-460e-80ab-0722c53471fb",
+                                      "name": "Unauthorized.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"users\": [\n    {\n      \"email\": \"<email>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"role\": \"<string>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"role\": \"<string>\"\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/users",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "push",
+                                            "v1",
+                                            "customer",
+                                            "apps",
+                                            ":appId",
+                                            "users"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "appId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:40:57.000Z",
+                                      "updatedAt": "2026-07-28T02:40:57.000Z",
+                                      "uid": "35240-cc9def5d-6c22-460e-80ab-0722c53471fb"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T02:40:57.000Z",
+                                  "updatedAt": "2026-07-28T02:40:57.000Z",
+                                  "uid": "35240-226b148f-8602-465b-b1ab-6f3d27bbab04"
+                                },
+                                {
+                                  "name": "Productiv Get Provisioned Users",
+                                  "id": "0da2eb4a-a3a7-40bb-a15a-26b4a2c6f0da",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/users",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "services",
+                                        "push",
+                                        "v1",
+                                        "customer",
+                                        "apps",
+                                        ":appId",
+                                        "users"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "b308fb09-bf92-4653-9067-6059b4c374d7",
+                                          "key": "appId",
+                                          "value": "<string>",
+                                          "description": "(Required) The unique identifier of the application."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Retrieve the list of users provisioned to an application."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "4323ddc5-53e4-46b9-8403-bfd62a49c409",
+                                      "name": "Provisioned users retrieved successfully.",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/users",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "push",
+                                            "v1",
+                                            "customer",
+                                            "apps",
+                                            ":appId",
+                                            "users"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "appId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"users\": [\n    {\n      \"email\": \"<email>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"role\": \"<string>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"role\": \"<string>\"\n    }\n  ]\n}",
+                                      "createdAt": "2026-07-28T02:40:57.000Z",
+                                      "updatedAt": "2026-07-28T02:40:57.000Z",
+                                      "uid": "35240-4323ddc5-53e4-46b9-8403-bfd62a49c409"
+                                    },
+                                    {
+                                      "id": "79764c95-1c24-472a-a4ae-96a84cce5acc",
+                                      "name": "Unauthorized.",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/users",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "push",
+                                            "v1",
+                                            "customer",
+                                            "apps",
+                                            ":appId",
+                                            "users"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "appId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:40:57.000Z",
+                                      "updatedAt": "2026-07-28T02:40:57.000Z",
+                                      "uid": "35240-79764c95-1c24-472a-a4ae-96a84cce5acc"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T02:40:57.000Z",
+                                  "updatedAt": "2026-07-28T02:40:57.000Z",
+                                  "uid": "35240-0da2eb4a-a3a7-40bb-a15a-26b4a2c6f0da"
+                                },
+                                {
+                                  "name": "Productiv Delete Provisioned Users",
+                                  "id": "c1bf9334-00fe-40f2-ba75-2f63c65be529",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"users\": [\n    {\n      \"email\": \"<email>\"\n    },\n    {\n      \"email\": \"<email>\"\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/users",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "services",
+                                        "push",
+                                        "v1",
+                                        "customer",
+                                        "apps",
+                                        ":appId",
+                                        "users"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "1cdf66c0-8010-4aa8-b179-73126eafea25",
+                                          "key": "appId",
+                                          "value": "<string>",
+                                          "description": "(Required) The unique identifier of the application."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Remove provisioned users from an application in Productiv."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "9cde8257-93b6-4778-9b9b-5a6ee6677ec7",
+                                      "name": "Provisioned users removed successfully.",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"users\": [\n    {\n      \"email\": \"<email>\"\n    },\n    {\n      \"email\": \"<email>\"\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/users",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "push",
+                                            "v1",
+                                            "customer",
+                                            "apps",
+                                            ":appId",
+                                            "users"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "appId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:40:57.000Z",
+                                      "updatedAt": "2026-07-28T02:40:57.000Z",
+                                      "uid": "35240-9cde8257-93b6-4778-9b9b-5a6ee6677ec7"
+                                    },
+                                    {
+                                      "id": "c1ab12c7-9bf5-48b6-adc1-b5f592b6d016",
+                                      "name": "Bad request.",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"users\": [\n    {\n      \"email\": \"<email>\"\n    },\n    {\n      \"email\": \"<email>\"\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/users",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "push",
+                                            "v1",
+                                            "customer",
+                                            "apps",
+                                            ":appId",
+                                            "users"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "appId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Bad Request",
+                                      "code": 400,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:40:57.000Z",
+                                      "updatedAt": "2026-07-28T02:40:57.000Z",
+                                      "uid": "35240-c1ab12c7-9bf5-48b6-adc1-b5f592b6d016"
+                                    },
+                                    {
+                                      "id": "8e8354e7-f3c0-4845-a15f-ad629fadc83f",
+                                      "name": "Unauthorized.",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"users\": [\n    {\n      \"email\": \"<email>\"\n    },\n    {\n      \"email\": \"<email>\"\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/users",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "push",
+                                            "v1",
+                                            "customer",
+                                            "apps",
+                                            ":appId",
+                                            "users"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "appId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:40:57.000Z",
+                                      "updatedAt": "2026-07-28T02:40:57.000Z",
+                                      "uid": "35240-8e8354e7-f3c0-4845-a15f-ad629fadc83f"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T02:40:57.000Z",
+                                  "updatedAt": "2026-07-28T02:40:57.000Z",
+                                  "uid": "35240-c1bf9334-00fe-40f2-ba75-2f63c65be529"
+                                }
+                              ],
+                              "id": "ee804058-b421-4baf-a66f-7971e752925d",
+                              "createdAt": "2026-07-28T02:40:57.000Z",
+                              "updatedAt": "2026-07-28T02:40:57.000Z",
+                              "uid": "35240-ee804058-b421-4baf-a66f-7971e752925d"
+                            }
+                          ],
+                          "id": "cc64f45d-6dbf-4261-9324-00695401b350",
+                          "createdAt": "2026-07-28T02:40:57.000Z",
+                          "updatedAt": "2026-07-28T02:40:57.000Z",
+                          "uid": "35240-cc64f45d-6dbf-4261-9324-00695401b350"
+                        }
+                      ],
+                      "id": "b7317cae-3070-4d6c-bafa-04b5bb17eeca",
+                      "createdAt": "2026-07-28T02:40:57.000Z",
+                      "updatedAt": "2026-07-28T02:40:57.000Z",
+                      "uid": "35240-b7317cae-3070-4d6c-bafa-04b5bb17eeca"
+                    }
+                  ],
+                  "id": "aa3e0cdf-ea88-423f-bfa9-971101b29b3b",
+                  "createdAt": "2026-07-28T02:40:57.000Z",
+                  "updatedAt": "2026-07-28T02:40:57.000Z",
+                  "uid": "35240-aa3e0cdf-ea88-423f-bfa9-971101b29b3b"
+                }
+              ],
+              "id": "a00ace02-958c-40ad-842a-d9c7e671689c",
+              "createdAt": "2026-07-28T02:40:57.000Z",
+              "updatedAt": "2026-07-28T02:40:57.000Z",
+              "uid": "35240-a00ace02-958c-40ad-842a-d9c7e671689c"
+            }
+          ],
+          "id": "e970f960-ae91-4505-9259-e63eb1e586df",
+          "createdAt": "2026-07-28T02:40:57.000Z",
+          "updatedAt": "2026-07-28T02:40:57.000Z",
+          "uid": "35240-e970f960-ae91-4505-9259-e63eb1e586df"
+        }
+      ],
+      "id": "084195f4-6224-497c-8bba-5f6e4440742f",
+      "createdAt": "2026-07-28T02:40:57.000Z",
+      "updatedAt": "2026-07-28T02:40:57.000Z",
+      "uid": "35240-084195f4-6224-497c-8bba-5f6e4440742f"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://public-api.productiv.com"
+    }
+  ]
+}

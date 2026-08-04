@@ -1,0 +1,603 @@
+{
+  "info": {
+    "_postman_id": "c10329b6-830f-43d4-b852-8ce3f914a669",
+    "name": "Productiv Developer App Details Provisioning Workflows API",
+    "description": "The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.\n\nContact Support:\n Name: Productiv Support\n Email: support@productiv.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:40:57.000Z",
+    "updatedAt": "2026-07-28T02:40:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c10329b6-830f-43d4-b852-8ce3f914a669"
+  },
+  "item": [
+    {
+      "name": "services",
+      "item": [
+        {
+          "name": "export",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "customer",
+                  "item": [
+                    {
+                      "name": "provisioning-workflows",
+                      "item": [
+                        {
+                          "name": "{workflowId}",
+                          "item": [
+                            {
+                              "name": "executions",
+                              "item": [
+                                {
+                                  "name": "{executionId}",
+                                  "item": [
+                                    {
+                                      "name": "Productiv Get Provisioning Workflow Execution",
+                                      "id": "dde73e9c-29f2-4f0d-bd85-fe71a13f6d41",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/export/v1/customer/provisioning-workflows/:workflowId/executions/:executionId",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "export",
+                                            "v1",
+                                            "customer",
+                                            "provisioning-workflows",
+                                            ":workflowId",
+                                            "executions",
+                                            ":executionId"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "5a901dd0-d052-489b-971d-840413d4907e",
+                                              "key": "workflowId",
+                                              "value": "<string>",
+                                              "description": "(Required) The unique identifier of the provisioning workflow."
+                                            },
+                                            {
+                                              "id": "5d553e41-f755-44f4-b05f-5cd0c65a392b",
+                                              "key": "executionId",
+                                              "value": "<string>",
+                                              "description": "(Required) The unique identifier of the execution."
+                                            }
+                                          ]
+                                        },
+                                        "description": "Query the details of a specific provisioning workflow execution, including suggested or actioned outcomes for matched users."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "6f7f2abd-54d4-4665-9c8e-1e8de37e9bde",
+                                          "name": "Execution details returned successfully.",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/services/export/v1/customer/provisioning-workflows/:workflowId/executions/:executionId",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "services",
+                                                "export",
+                                                "v1",
+                                                "customer",
+                                                "provisioning-workflows",
+                                                ":workflowId",
+                                                "executions",
+                                                ":executionId"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "workflowId"
+                                                },
+                                                {
+                                                  "key": "executionId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"executionId\": \"<string>\",\n  \"workflowId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"users\": [\n    {\n      \"email\": \"<email>\",\n      \"suggestedOutcome\": \"<string>\",\n      \"actionedOutcome\": \"<string>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"suggestedOutcome\": \"<string>\",\n      \"actionedOutcome\": \"<string>\"\n    }\n  ]\n}",
+                                          "createdAt": "2026-07-28T02:40:58.000Z",
+                                          "updatedAt": "2026-07-28T02:40:58.000Z",
+                                          "uid": "35240-6f7f2abd-54d4-4665-9c8e-1e8de37e9bde"
+                                        },
+                                        {
+                                          "id": "b8f0561e-fd6a-4927-a7dd-21923f67c7da",
+                                          "name": "Unauthorized.",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/services/export/v1/customer/provisioning-workflows/:workflowId/executions/:executionId",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "services",
+                                                "export",
+                                                "v1",
+                                                "customer",
+                                                "provisioning-workflows",
+                                                ":workflowId",
+                                                "executions",
+                                                ":executionId"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "workflowId"
+                                                },
+                                                {
+                                                  "key": "executionId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Unauthorized",
+                                          "code": 401,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T02:40:58.000Z",
+                                          "updatedAt": "2026-07-28T02:40:58.000Z",
+                                          "uid": "35240-b8f0561e-fd6a-4927-a7dd-21923f67c7da"
+                                        },
+                                        {
+                                          "id": "9efb7c02-ca4c-47aa-897a-4e162ab96fce",
+                                          "name": "Execution not found.",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/services/export/v1/customer/provisioning-workflows/:workflowId/executions/:executionId",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "services",
+                                                "export",
+                                                "v1",
+                                                "customer",
+                                                "provisioning-workflows",
+                                                ":workflowId",
+                                                "executions",
+                                                ":executionId"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "workflowId"
+                                                },
+                                                {
+                                                  "key": "executionId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Not Found",
+                                          "code": 404,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T02:40:58.000Z",
+                                          "updatedAt": "2026-07-28T02:40:58.000Z",
+                                          "uid": "35240-9efb7c02-ca4c-47aa-897a-4e162ab96fce"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T02:40:58.000Z",
+                                      "updatedAt": "2026-07-28T02:40:58.000Z",
+                                      "uid": "35240-dde73e9c-29f2-4f0d-bd85-fe71a13f6d41"
+                                    }
+                                  ],
+                                  "id": "f72526cf-0147-4e56-89b8-a02f0b08f7a2",
+                                  "createdAt": "2026-07-28T02:40:57.000Z",
+                                  "updatedAt": "2026-07-28T02:40:57.000Z",
+                                  "uid": "35240-f72526cf-0147-4e56-89b8-a02f0b08f7a2"
+                                },
+                                {
+                                  "name": "Productiv List Provisioning Execution Summaries",
+                                  "id": "167c6c5f-2e06-4ef7-bd7b-dfe53d22b72e",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/services/export/v1/customer/provisioning-workflows/:workflowId/executions?startTime=<dateTime>&endTime=<dateTime>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "services",
+                                        "export",
+                                        "v1",
+                                        "customer",
+                                        "provisioning-workflows",
+                                        ":workflowId",
+                                        "executions"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Start time for the time range filter.",
+                                          "key": "startTime",
+                                          "value": "<dateTime>"
+                                        },
+                                        {
+                                          "description": "End time for the time range filter.",
+                                          "key": "endTime",
+                                          "value": "<dateTime>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "9400e711-5226-4b08-9bde-438278a4375c",
+                                          "key": "workflowId",
+                                          "value": "<string>",
+                                          "description": "(Required) The unique identifier of the provisioning workflow."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Query a list of provisioning workflow execution summaries for an application instance within a time range."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "dd07bb5d-33af-4c2e-a9f9-ca03258edfd7",
+                                      "name": "Execution summaries returned successfully.",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/export/v1/customer/provisioning-workflows/:workflowId/executions?startTime=<dateTime>&endTime=<dateTime>",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "export",
+                                            "v1",
+                                            "customer",
+                                            "provisioning-workflows",
+                                            ":workflowId",
+                                            "executions"
+                                          ],
+                                          "query": [
+                                            {
+                                              "description": "Start time for the time range filter.",
+                                              "key": "startTime",
+                                              "value": "<dateTime>"
+                                            },
+                                            {
+                                              "description": "End time for the time range filter.",
+                                              "key": "endTime",
+                                              "value": "<dateTime>"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "workflowId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"executions\": [\n    {\n      \"executionId\": \"<string>\",\n      \"workflowId\": \"<string>\",\n      \"status\": \"<string>\",\n      \"startTime\": \"<dateTime>\",\n      \"endTime\": \"<dateTime>\"\n    },\n    {\n      \"executionId\": \"<string>\",\n      \"workflowId\": \"<string>\",\n      \"status\": \"<string>\",\n      \"startTime\": \"<dateTime>\",\n      \"endTime\": \"<dateTime>\"\n    }\n  ]\n}",
+                                      "createdAt": "2026-07-28T02:40:58.000Z",
+                                      "updatedAt": "2026-07-28T02:40:58.000Z",
+                                      "uid": "35240-dd07bb5d-33af-4c2e-a9f9-ca03258edfd7"
+                                    },
+                                    {
+                                      "id": "efb82010-90c0-4f05-962f-d4e8949d58ca",
+                                      "name": "Unauthorized.",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/export/v1/customer/provisioning-workflows/:workflowId/executions?startTime=<dateTime>&endTime=<dateTime>",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "export",
+                                            "v1",
+                                            "customer",
+                                            "provisioning-workflows",
+                                            ":workflowId",
+                                            "executions"
+                                          ],
+                                          "query": [
+                                            {
+                                              "description": "Start time for the time range filter.",
+                                              "key": "startTime",
+                                              "value": "<dateTime>"
+                                            },
+                                            {
+                                              "description": "End time for the time range filter.",
+                                              "key": "endTime",
+                                              "value": "<dateTime>"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "workflowId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:40:58.000Z",
+                                      "updatedAt": "2026-07-28T02:40:58.000Z",
+                                      "uid": "35240-efb82010-90c0-4f05-962f-d4e8949d58ca"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T02:40:58.000Z",
+                                  "updatedAt": "2026-07-28T02:40:58.000Z",
+                                  "uid": "35240-167c6c5f-2e06-4ef7-bd7b-dfe53d22b72e"
+                                }
+                              ],
+                              "id": "f2e7c7da-aa27-497d-b402-92858127967b",
+                              "createdAt": "2026-07-28T02:40:57.000Z",
+                              "updatedAt": "2026-07-28T02:40:57.000Z",
+                              "uid": "35240-f2e7c7da-aa27-497d-b402-92858127967b"
+                            }
+                          ],
+                          "id": "083e95c5-1e3b-46d0-a266-f8ec721e56cf",
+                          "createdAt": "2026-07-28T02:40:57.000Z",
+                          "updatedAt": "2026-07-28T02:40:57.000Z",
+                          "uid": "35240-083e95c5-1e3b-46d0-a266-f8ec721e56cf"
+                        },
+                        {
+                          "name": "Productiv List Provisioning Workflows",
+                          "id": "12eaaae2-ad20-4bd4-b03e-c2c3705a3ccc",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/services/export/v1/customer/provisioning-workflows",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "services",
+                                "export",
+                                "v1",
+                                "customer",
+                                "provisioning-workflows"
+                              ]
+                            },
+                            "description": "Query the entire list of provisioning workflows configured on your account. Rate limit is 20 requests per second."
+                          },
+                          "response": [
+                            {
+                              "id": "55400b61-e6c5-4c8c-a59e-b920d4d16ff3",
+                              "name": "Provisioning workflows returned successfully.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/services/export/v1/customer/provisioning-workflows",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "services",
+                                    "export",
+                                    "v1",
+                                    "customer",
+                                    "provisioning-workflows"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"workflows\": [\n    {\n      \"workflowId\": \"<string>\",\n      \"workflowName\": \"<string>\",\n      \"applicationId\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"workflowId\": \"<string>\",\n      \"workflowName\": \"<string>\",\n      \"applicationId\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:40:58.000Z",
+                              "updatedAt": "2026-07-28T02:40:58.000Z",
+                              "uid": "35240-55400b61-e6c5-4c8c-a59e-b920d4d16ff3"
+                            },
+                            {
+                              "id": "13c64401-b771-43cb-9751-aea285804a78",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/services/export/v1/customer/provisioning-workflows",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "services",
+                                    "export",
+                                    "v1",
+                                    "customer",
+                                    "provisioning-workflows"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:40:58.000Z",
+                              "updatedAt": "2026-07-28T02:40:58.000Z",
+                              "uid": "35240-13c64401-b771-43cb-9751-aea285804a78"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:40:58.000Z",
+                          "updatedAt": "2026-07-28T02:40:58.000Z",
+                          "uid": "35240-12eaaae2-ad20-4bd4-b03e-c2c3705a3ccc"
+                        }
+                      ],
+                      "id": "07f8118e-7cca-422a-98da-3ba3417c89da",
+                      "createdAt": "2026-07-28T02:40:57.000Z",
+                      "updatedAt": "2026-07-28T02:40:57.000Z",
+                      "uid": "35240-07f8118e-7cca-422a-98da-3ba3417c89da"
+                    }
+                  ],
+                  "id": "8873a3c3-119c-40a5-86aa-701b5b00c135",
+                  "createdAt": "2026-07-28T02:40:57.000Z",
+                  "updatedAt": "2026-07-28T02:40:57.000Z",
+                  "uid": "35240-8873a3c3-119c-40a5-86aa-701b5b00c135"
+                }
+              ],
+              "id": "cb56287d-878e-4c6f-b916-203bc66927f9",
+              "createdAt": "2026-07-28T02:40:57.000Z",
+              "updatedAt": "2026-07-28T02:40:57.000Z",
+              "uid": "35240-cb56287d-878e-4c6f-b916-203bc66927f9"
+            }
+          ],
+          "id": "b5ba0292-02ec-4c51-a51a-8dddce68750d",
+          "createdAt": "2026-07-28T02:40:57.000Z",
+          "updatedAt": "2026-07-28T02:40:57.000Z",
+          "uid": "35240-b5ba0292-02ec-4c51-a51a-8dddce68750d"
+        }
+      ],
+      "id": "21939dca-a206-4a90-a8a5-37ac930cb455",
+      "createdAt": "2026-07-28T02:40:57.000Z",
+      "updatedAt": "2026-07-28T02:40:57.000Z",
+      "uid": "35240-21939dca-a206-4a90-a8a5-37ac930cb455"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://public-api.productiv.com"
+    }
+  ]
+}

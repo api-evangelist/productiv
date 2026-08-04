@@ -1,0 +1,193 @@
+{
+  "info": {
+    "_postman_id": "df298480-b566-4a60-bc92-3b868e44df43",
+    "name": "Productiv Developer App Details App Summaries API",
+    "description": "The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.\n\nContact Support:\n Name: Productiv Support\n Email: support@productiv.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:40:50.000Z",
+    "updatedAt": "2026-07-28T02:40:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-df298480-b566-4a60-bc92-3b868e44df43"
+  },
+  "item": [
+    {
+      "name": "services",
+      "item": [
+        {
+          "name": "export",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "customer",
+                  "item": [
+                    {
+                      "name": "app-summaries",
+                      "item": [
+                        {
+                          "name": "Productiv Get App Summaries",
+                          "id": "60b260fa-00c9-4c3a-a1f2-a9f4891f0b5d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/services/export/v1/customer/app-summaries",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "services",
+                                "export",
+                                "v1",
+                                "customer",
+                                "app-summaries"
+                              ]
+                            },
+                            "description": "Query the entire list of apps that are part of your company's portfolio. Returns a small set of app attributes such as ApplicationId, AppStatus, and VendorName. For more detailed information about a particular app, use the App Details endpoint with the ApplicationId. Rate limit is 20 requests per second."
+                          },
+                          "response": [
+                            {
+                              "id": "3863c02c-0f47-4bae-8349-a7ce2bc3c563",
+                              "name": "App summaries returned successfully.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/services/export/v1/customer/app-summaries",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "services",
+                                    "export",
+                                    "v1",
+                                    "customer",
+                                    "app-summaries"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"apps\": [\n    {\n      \"ApplicationId\": \"<string>\",\n      \"AppName\": \"<string>\",\n      \"AppStatus\": \"<string>\",\n      \"VendorName\": \"<string>\",\n      \"AppCategory\": \"<string>\"\n    },\n    {\n      \"ApplicationId\": \"<string>\",\n      \"AppName\": \"<string>\",\n      \"AppStatus\": \"<string>\",\n      \"VendorName\": \"<string>\",\n      \"AppCategory\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:40:51.000Z",
+                              "updatedAt": "2026-07-28T02:40:51.000Z",
+                              "uid": "35240-3863c02c-0f47-4bae-8349-a7ce2bc3c563"
+                            },
+                            {
+                              "id": "934db654-74d2-478d-a14f-bec2e312b4b5",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/services/export/v1/customer/app-summaries",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "services",
+                                    "export",
+                                    "v1",
+                                    "customer",
+                                    "app-summaries"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:40:51.000Z",
+                              "updatedAt": "2026-07-28T02:40:51.000Z",
+                              "uid": "35240-934db654-74d2-478d-a14f-bec2e312b4b5"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:40:51.000Z",
+                          "updatedAt": "2026-07-28T02:40:51.000Z",
+                          "uid": "35240-60b260fa-00c9-4c3a-a1f2-a9f4891f0b5d"
+                        }
+                      ],
+                      "id": "6eca682a-898a-4bf3-93a6-33903a91d298",
+                      "createdAt": "2026-07-28T02:40:51.000Z",
+                      "updatedAt": "2026-07-28T02:40:51.000Z",
+                      "uid": "35240-6eca682a-898a-4bf3-93a6-33903a91d298"
+                    }
+                  ],
+                  "id": "9d8be94c-6a41-436c-b8da-846d1b33f1cb",
+                  "createdAt": "2026-07-28T02:40:51.000Z",
+                  "updatedAt": "2026-07-28T02:40:51.000Z",
+                  "uid": "35240-9d8be94c-6a41-436c-b8da-846d1b33f1cb"
+                }
+              ],
+              "id": "de7e12a6-f64b-457d-94ed-cfe3acd7952f",
+              "createdAt": "2026-07-28T02:40:51.000Z",
+              "updatedAt": "2026-07-28T02:40:51.000Z",
+              "uid": "35240-de7e12a6-f64b-457d-94ed-cfe3acd7952f"
+            }
+          ],
+          "id": "4dc3f03f-c05b-4591-81c8-b2d5bc59e038",
+          "createdAt": "2026-07-28T02:40:51.000Z",
+          "updatedAt": "2026-07-28T02:40:51.000Z",
+          "uid": "35240-4dc3f03f-c05b-4591-81c8-b2d5bc59e038"
+        }
+      ],
+      "id": "e18d8525-701f-4fae-9eb3-841146e09b97",
+      "createdAt": "2026-07-28T02:40:51.000Z",
+      "updatedAt": "2026-07-28T02:40:51.000Z",
+      "uid": "35240-e18d8525-701f-4fae-9eb3-841146e09b97"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://public-api.productiv.com"
+    }
+  ]
+}

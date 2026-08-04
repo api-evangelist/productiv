@@ -1,0 +1,256 @@
+{
+  "info": {
+    "_postman_id": "81f4d654-7851-455a-8302-f797818f3344",
+    "name": "Productiv Developer App Details Authentication API",
+    "description": "The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.\n\nContact Support:\n Name: Productiv Support\n Email: support@productiv.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:40:53.000Z",
+    "updatedAt": "2026-07-28T02:40:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-81f4d654-7851-455a-8302-f797818f3344"
+  },
+  "item": [
+    {
+      "name": "oauth2",
+      "item": [
+        {
+          "name": "token",
+          "item": [
+            {
+              "name": "Productiv Generate Access Token",
+              "id": "6a49244e-d696-4e02-9867-0a753ee72c74",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The OAuth2 grant type.",
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    },
+                    {
+                      "description": "(Required) Your application client ID.",
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Your application client secret.",
+                      "key": "client_secret",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Space-separated list of scopes. Available scopes include https://api.productiv.com/connector.write and https://api.productiv.com/report.read.",
+                      "key": "scope",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "https://login.api.productiv.com/oauth2/token",
+                  "protocol": "https",
+                  "host": [
+                    "login",
+                    "api",
+                    "productiv",
+                    "com"
+                  ],
+                  "path": [
+                    "oauth2",
+                    "token"
+                  ]
+                },
+                "description": "Obtain an OAuth2 access token using client credentials. The returned access token must be included as a Bearer token in the Authorization header of all subsequent API requests. Each API may require different scopes."
+              },
+              "response": [
+                {
+                  "id": "d0e7ba28-b0e6-4549-ad70-6b8a116deb54",
+                  "name": "Successful token response.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The OAuth2 grant type.",
+                          "key": "grant_type",
+                          "value": "client_credentials"
+                        },
+                        {
+                          "description": "(Required) Your application client ID.",
+                          "key": "client_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Your application client secret.",
+                          "key": "client_secret",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Space-separated list of scopes. Available scopes include https://api.productiv.com/connector.write and https://api.productiv.com/report.read.",
+                          "key": "scope",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "https://login.api.productiv.com/oauth2/token",
+                      "protocol": "https",
+                      "host": [
+                        "login",
+                        "api",
+                        "productiv",
+                        "com"
+                      ],
+                      "path": [
+                        "oauth2",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"access_token\": \"<string>\",\n  \"token_type\": \"<string>\",\n  \"expires_in\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T02:40:54.000Z",
+                  "updatedAt": "2026-07-28T02:40:54.000Z",
+                  "uid": "35240-d0e7ba28-b0e6-4549-ad70-6b8a116deb54"
+                },
+                {
+                  "id": "77d9d3b5-e666-4b5f-ad3b-d7b37d721f57",
+                  "name": "Invalid client credentials.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The OAuth2 grant type.",
+                          "key": "grant_type",
+                          "value": "client_credentials"
+                        },
+                        {
+                          "description": "(Required) Your application client ID.",
+                          "key": "client_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Your application client secret.",
+                          "key": "client_secret",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Space-separated list of scopes. Available scopes include https://api.productiv.com/connector.write and https://api.productiv.com/report.read.",
+                          "key": "scope",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "https://login.api.productiv.com/oauth2/token",
+                      "protocol": "https",
+                      "host": [
+                        "login",
+                        "api",
+                        "productiv",
+                        "com"
+                      ],
+                      "path": [
+                        "oauth2",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:40:54.000Z",
+                  "updatedAt": "2026-07-28T02:40:54.000Z",
+                  "uid": "35240-77d9d3b5-e666-4b5f-ad3b-d7b37d721f57"
+                }
+              ],
+              "createdAt": "2026-07-28T02:40:54.000Z",
+              "updatedAt": "2026-07-28T02:40:54.000Z",
+              "uid": "35240-6a49244e-d696-4e02-9867-0a753ee72c74"
+            }
+          ],
+          "id": "2426169d-2e3c-4a43-b3a7-0d5b9e142897",
+          "createdAt": "2026-07-28T02:40:54.000Z",
+          "updatedAt": "2026-07-28T02:40:54.000Z",
+          "uid": "35240-2426169d-2e3c-4a43-b3a7-0d5b9e142897"
+        }
+      ],
+      "id": "13ac3520-b8c2-435c-8609-97c74fd3a6db",
+      "createdAt": "2026-07-28T02:40:54.000Z",
+      "updatedAt": "2026-07-28T02:40:54.000Z",
+      "uid": "35240-13ac3520-b8c2-435c-8609-97c74fd3a6db"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://public-api.productiv.com"
+    }
+  ]
+}

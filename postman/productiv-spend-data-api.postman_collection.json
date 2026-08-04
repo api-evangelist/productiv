@@ -1,0 +1,322 @@
+{
+  "info": {
+    "_postman_id": "f8a8bb18-e741-4388-9e68-45365995dda2",
+    "name": "Productiv Developer App Details Spend Data API",
+    "description": "The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.\n\nContact Support:\n Name: Productiv Support\n Email: support@productiv.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:41:03.000Z",
+    "updatedAt": "2026-07-28T02:41:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f8a8bb18-e741-4388-9e68-45365995dda2"
+  },
+  "item": [
+    {
+      "name": "services",
+      "item": [
+        {
+          "name": "push",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "customer",
+                  "item": [
+                    {
+                      "name": "apps",
+                      "item": [
+                        {
+                          "name": "{appId}",
+                          "item": [
+                            {
+                              "name": "spend",
+                              "item": [
+                                {
+                                  "name": "Productiv Publish Spend Data",
+                                  "id": "212d83af-4c29-45aa-aa39-1ceb9ece24ee",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"spendData\": [\n    {\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"date\": \"<date>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"date\": \"<date>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/spend",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "services",
+                                        "push",
+                                        "v1",
+                                        "customer",
+                                        "apps",
+                                        ":appId",
+                                        "spend"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "204643fb-8651-4918-a32a-910ccf0412e6",
+                                          "key": "appId",
+                                          "value": "<string>",
+                                          "description": "(Required) The unique identifier of the application."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Push spend data to Productiv for an application from one or more existing systems. Before using this API, the application must be set up and a unique appId obtained."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "534cd9a8-c5df-479b-88ab-45747be1cda5",
+                                      "name": "Spend data published successfully.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"spendData\": [\n    {\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"date\": \"<date>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"date\": \"<date>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/spend",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "push",
+                                            "v1",
+                                            "customer",
+                                            "apps",
+                                            ":appId",
+                                            "spend"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "appId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:41:03.000Z",
+                                      "updatedAt": "2026-07-28T02:41:03.000Z",
+                                      "uid": "35240-534cd9a8-c5df-479b-88ab-45747be1cda5"
+                                    },
+                                    {
+                                      "id": "08aee9bb-9db5-4173-afeb-fa6533f2d6ad",
+                                      "name": "Bad request.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"spendData\": [\n    {\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"date\": \"<date>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"date\": \"<date>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/spend",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "push",
+                                            "v1",
+                                            "customer",
+                                            "apps",
+                                            ":appId",
+                                            "spend"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "appId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Bad Request",
+                                      "code": 400,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:41:03.000Z",
+                                      "updatedAt": "2026-07-28T02:41:03.000Z",
+                                      "uid": "35240-08aee9bb-9db5-4173-afeb-fa6533f2d6ad"
+                                    },
+                                    {
+                                      "id": "5327ad0b-04b6-48b0-bf51-9dc6d3e66e5e",
+                                      "name": "Unauthorized.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"spendData\": [\n    {\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"date\": \"<date>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"date\": \"<date>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/spend",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "push",
+                                            "v1",
+                                            "customer",
+                                            "apps",
+                                            ":appId",
+                                            "spend"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "appId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:41:03.000Z",
+                                      "updatedAt": "2026-07-28T02:41:03.000Z",
+                                      "uid": "35240-5327ad0b-04b6-48b0-bf51-9dc6d3e66e5e"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T02:41:03.000Z",
+                                  "updatedAt": "2026-07-28T02:41:03.000Z",
+                                  "uid": "35240-212d83af-4c29-45aa-aa39-1ceb9ece24ee"
+                                }
+                              ],
+                              "id": "c1f735d9-3a66-428c-9458-1438933bbd41",
+                              "createdAt": "2026-07-28T02:41:03.000Z",
+                              "updatedAt": "2026-07-28T02:41:03.000Z",
+                              "uid": "35240-c1f735d9-3a66-428c-9458-1438933bbd41"
+                            }
+                          ],
+                          "id": "8d1da4ac-bed4-4c69-baa1-352386e55ab2",
+                          "createdAt": "2026-07-28T02:41:03.000Z",
+                          "updatedAt": "2026-07-28T02:41:03.000Z",
+                          "uid": "35240-8d1da4ac-bed4-4c69-baa1-352386e55ab2"
+                        }
+                      ],
+                      "id": "8d7990c6-4cd0-43fe-b0df-1d723ae5e98f",
+                      "createdAt": "2026-07-28T02:41:03.000Z",
+                      "updatedAt": "2026-07-28T02:41:03.000Z",
+                      "uid": "35240-8d7990c6-4cd0-43fe-b0df-1d723ae5e98f"
+                    }
+                  ],
+                  "id": "fa60a5e0-72e8-4512-9e6c-1524a6f92ece",
+                  "createdAt": "2026-07-28T02:41:03.000Z",
+                  "updatedAt": "2026-07-28T02:41:03.000Z",
+                  "uid": "35240-fa60a5e0-72e8-4512-9e6c-1524a6f92ece"
+                }
+              ],
+              "id": "8a1a2758-4b3a-4c4c-a47f-e104fd0715f0",
+              "createdAt": "2026-07-28T02:41:03.000Z",
+              "updatedAt": "2026-07-28T02:41:03.000Z",
+              "uid": "35240-8a1a2758-4b3a-4c4c-a47f-e104fd0715f0"
+            }
+          ],
+          "id": "c3b0e5f9-d60d-4079-b3eb-0c5a75abb402",
+          "createdAt": "2026-07-28T02:41:03.000Z",
+          "updatedAt": "2026-07-28T02:41:03.000Z",
+          "uid": "35240-c3b0e5f9-d60d-4079-b3eb-0c5a75abb402"
+        }
+      ],
+      "id": "1e1badf2-a4bd-48f9-ab04-e597da6378e9",
+      "createdAt": "2026-07-28T02:41:03.000Z",
+      "updatedAt": "2026-07-28T02:41:03.000Z",
+      "uid": "35240-1e1badf2-a4bd-48f9-ab04-e597da6378e9"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://public-api.productiv.com"
+    }
+  ]
+}

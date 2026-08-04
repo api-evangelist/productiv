@@ -1,0 +1,312 @@
+{
+  "info": {
+    "_postman_id": "43dcf832-090c-4c49-bae8-59371997e4f6",
+    "name": "Productiv Developer App Details Batch Upload API",
+    "description": "The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.\n\nContact Support:\n Name: Productiv Support\n Email: support@productiv.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:40:54.000Z",
+    "updatedAt": "2026-07-28T02:40:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-43dcf832-090c-4c49-bae8-59371997e4f6"
+  },
+  "item": [
+    {
+      "name": "services",
+      "item": [
+        {
+          "name": "push",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "customer",
+                  "item": [
+                    {
+                      "name": "apps",
+                      "item": [
+                        {
+                          "name": "{appId}",
+                          "item": [
+                            {
+                              "name": "upload",
+                              "item": [
+                                {
+                                  "name": "Productiv Get Batch File Upload Urls",
+                                  "id": "2af3d207-f80f-4c62-8919-4700d6ac8da2",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/upload?filenames=<string>&filenames=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "services",
+                                        "push",
+                                        "v1",
+                                        "customer",
+                                        "apps",
+                                        ":appId",
+                                        "upload"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "(Required) The filenames to upload. Can be specified multiple times.",
+                                          "key": "filenames",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "description": "(Required) The filenames to upload. Can be specified multiple times.",
+                                          "key": "filenames",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "2e986fdb-d988-4c17-876b-aa9d4b6d13b7",
+                                          "key": "appId",
+                                          "value": "<string>",
+                                          "description": "(Required) The unique identifier of the application."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Get signed upload URLs for batch file uploads. Specify the filenames to upload as query parameters, and the response will return signed URLs for each file. Use the returned signed URLs to PUT each file."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "3d4066e4-e2a4-4594-a2e8-a615e53cb70b",
+                                      "name": "Signed upload URLs returned successfully.",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/upload?filenames=<string>",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "push",
+                                            "v1",
+                                            "customer",
+                                            "apps",
+                                            ":appId",
+                                            "upload"
+                                          ],
+                                          "query": [
+                                            {
+                                              "description": "(Required) The filenames to upload. Can be specified multiple times.",
+                                              "key": "filenames",
+                                              "value": "<string>"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "appId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"uploadUrls\": [\n    {\n      \"filename\": \"<string>\",\n      \"uploadUrl\": \"<uri>\"\n    },\n    {\n      \"filename\": \"<string>\",\n      \"uploadUrl\": \"<uri>\"\n    }\n  ]\n}",
+                                      "createdAt": "2026-07-28T02:40:55.000Z",
+                                      "updatedAt": "2026-07-28T02:40:55.000Z",
+                                      "uid": "35240-3d4066e4-e2a4-4594-a2e8-a615e53cb70b"
+                                    },
+                                    {
+                                      "id": "66d0ec97-60ee-4bd2-9281-9ce0c213ffa1",
+                                      "name": "Bad request.",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/upload?filenames=<string>",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "push",
+                                            "v1",
+                                            "customer",
+                                            "apps",
+                                            ":appId",
+                                            "upload"
+                                          ],
+                                          "query": [
+                                            {
+                                              "description": "(Required) The filenames to upload. Can be specified multiple times.",
+                                              "key": "filenames",
+                                              "value": "<string>"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "appId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Bad Request",
+                                      "code": 400,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:40:55.000Z",
+                                      "updatedAt": "2026-07-28T02:40:55.000Z",
+                                      "uid": "35240-66d0ec97-60ee-4bd2-9281-9ce0c213ffa1"
+                                    },
+                                    {
+                                      "id": "7dc43b19-1d74-4f1d-b719-180f78fdf753",
+                                      "name": "Unauthorized.",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/upload?filenames=<string>",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "push",
+                                            "v1",
+                                            "customer",
+                                            "apps",
+                                            ":appId",
+                                            "upload"
+                                          ],
+                                          "query": [
+                                            {
+                                              "description": "(Required) The filenames to upload. Can be specified multiple times.",
+                                              "key": "filenames",
+                                              "value": "<string>"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "appId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:40:55.000Z",
+                                      "updatedAt": "2026-07-28T02:40:55.000Z",
+                                      "uid": "35240-7dc43b19-1d74-4f1d-b719-180f78fdf753"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T02:40:55.000Z",
+                                  "updatedAt": "2026-07-28T02:40:55.000Z",
+                                  "uid": "35240-2af3d207-f80f-4c62-8919-4700d6ac8da2"
+                                }
+                              ],
+                              "id": "5b6f7258-f0fc-49ae-81f7-dacc78a42bf2",
+                              "createdAt": "2026-07-28T02:40:55.000Z",
+                              "updatedAt": "2026-07-28T02:40:55.000Z",
+                              "uid": "35240-5b6f7258-f0fc-49ae-81f7-dacc78a42bf2"
+                            }
+                          ],
+                          "id": "d939979a-8cea-4916-a917-95b27fdebcd8",
+                          "createdAt": "2026-07-28T02:40:55.000Z",
+                          "updatedAt": "2026-07-28T02:40:55.000Z",
+                          "uid": "35240-d939979a-8cea-4916-a917-95b27fdebcd8"
+                        }
+                      ],
+                      "id": "c3ec74c6-006c-4e52-93eb-52db1a5debbd",
+                      "createdAt": "2026-07-28T02:40:55.000Z",
+                      "updatedAt": "2026-07-28T02:40:55.000Z",
+                      "uid": "35240-c3ec74c6-006c-4e52-93eb-52db1a5debbd"
+                    }
+                  ],
+                  "id": "d92f7fed-af7f-41cf-915b-9b704b11b8af",
+                  "createdAt": "2026-07-28T02:40:55.000Z",
+                  "updatedAt": "2026-07-28T02:40:55.000Z",
+                  "uid": "35240-d92f7fed-af7f-41cf-915b-9b704b11b8af"
+                }
+              ],
+              "id": "ed111345-f7a0-456d-89b5-9cdd7c27a555",
+              "createdAt": "2026-07-28T02:40:55.000Z",
+              "updatedAt": "2026-07-28T02:40:55.000Z",
+              "uid": "35240-ed111345-f7a0-456d-89b5-9cdd7c27a555"
+            }
+          ],
+          "id": "b6c01932-cca3-45a9-9b1a-7f42a2e39fd6",
+          "createdAt": "2026-07-28T02:40:55.000Z",
+          "updatedAt": "2026-07-28T02:40:55.000Z",
+          "uid": "35240-b6c01932-cca3-45a9-9b1a-7f42a2e39fd6"
+        }
+      ],
+      "id": "3bc2e0d9-cf41-429e-891d-8c90de139e38",
+      "createdAt": "2026-07-28T02:40:55.000Z",
+      "updatedAt": "2026-07-28T02:40:55.000Z",
+      "uid": "35240-3bc2e0d9-cf41-429e-891d-8c90de139e38"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://public-api.productiv.com"
+    }
+  ]
+}

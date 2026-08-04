@@ -1,0 +1,34 @@
+{
+  "provider": "productiv",
+  "sources": [
+    "productiv-app-details-api-openapi.yml",
+    "productiv-app-summaries-api-openapi.yml",
+    "productiv-applications-api-openapi.yml",
+    "productiv-audit-events-api-openapi.yml",
+    "productiv-authentication-api-openapi.yml",
+    "productiv-batch-upload-api-openapi.yml",
+    "productiv-org-chart-api-openapi.yml",
+    "productiv-provisioned-users-api-openapi.yml",
+    "productiv-provisioning-workflows-api-openapi.yml",
+    "productiv-spend-data-api-openapi.yml",
+    "productiv-usage-events-api-openapi.yml"
+  ],
+  "outputs": [
+    "productiv-app-details-api-openapi.yml",
+    "productiv-app-summaries-api-openapi.yml",
+    "productiv-applications-api-openapi.yml",
+    "productiv-audit-events-api-openapi.yml",
+    "productiv-authentication-api-openapi.yml",
+    "productiv-batch-upload-api-openapi.yml",
+    "productiv-org-chart-api-openapi.yml",
+    "productiv-provisioned-users-api-openapi.yml",
+    "productiv-provisioning-workflows-api-openapi.yml",
+    "productiv-spend-data-api-openapi.yml",
+    "productiv-usage-events-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

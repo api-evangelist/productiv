@@ -1,0 +1,286 @@
+{
+  "info": {
+    "_postman_id": "6556bf09-0db0-475f-b6bf-d44f7de3be44",
+    "name": "Productiv Developer App Details Applications API",
+    "description": "The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.\n\nContact Support:\n Name: Productiv Support\n Email: support@productiv.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:40:51.000Z",
+    "updatedAt": "2026-07-28T02:40:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6556bf09-0db0-475f-b6bf-d44f7de3be44"
+  },
+  "item": [
+    {
+      "name": "services",
+      "item": [
+        {
+          "name": "push",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "customer",
+                  "item": [
+                    {
+                      "name": "apps",
+                      "item": [
+                        {
+                          "name": "Productiv Set up an Application",
+                          "id": "f6ac4fca-2828-4db8-b380-d2ecb7dadbb6",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"appName\": \"<string>\",\n  \"appDescription\": \"<string>\",\n  \"appCategory\": \"<string>\",\n  \"appUrl\": \"<uri>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/services/push/v1/customer/apps",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "services",
+                                "push",
+                                "v1",
+                                "customer",
+                                "apps"
+                              ]
+                            },
+                            "description": "Define and publish a new connected application to Productiv. This registers the application and returns a unique appId that is used for subsequent API calls such as publishing usage events and spend data."
+                          },
+                          "response": [
+                            {
+                              "id": "3a672b4c-27ce-4636-85b8-63dff7467d34",
+                              "name": "Application created successfully.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"appName\": \"<string>\",\n  \"appDescription\": \"<string>\",\n  \"appCategory\": \"<string>\",\n  \"appUrl\": \"<uri>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/services/push/v1/customer/apps",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "services",
+                                    "push",
+                                    "v1",
+                                    "customer",
+                                    "apps"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"appId\": \"<string>\",\n  \"appName\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:40:52.000Z",
+                              "updatedAt": "2026-07-28T02:40:52.000Z",
+                              "uid": "35240-3a672b4c-27ce-4636-85b8-63dff7467d34"
+                            },
+                            {
+                              "id": "86a1d583-6298-4f81-a3f8-4a1d2c996191",
+                              "name": "Bad request.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"appName\": \"<string>\",\n  \"appDescription\": \"<string>\",\n  \"appCategory\": \"<string>\",\n  \"appUrl\": \"<uri>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/services/push/v1/customer/apps",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "services",
+                                    "push",
+                                    "v1",
+                                    "customer",
+                                    "apps"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:40:52.000Z",
+                              "updatedAt": "2026-07-28T02:40:52.000Z",
+                              "uid": "35240-86a1d583-6298-4f81-a3f8-4a1d2c996191"
+                            },
+                            {
+                              "id": "52f2ca58-bf7c-4efd-aaac-676bebfb20b9",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"appName\": \"<string>\",\n  \"appDescription\": \"<string>\",\n  \"appCategory\": \"<string>\",\n  \"appUrl\": \"<uri>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/services/push/v1/customer/apps",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "services",
+                                    "push",
+                                    "v1",
+                                    "customer",
+                                    "apps"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:40:52.000Z",
+                              "updatedAt": "2026-07-28T02:40:52.000Z",
+                              "uid": "35240-52f2ca58-bf7c-4efd-aaac-676bebfb20b9"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:40:52.000Z",
+                          "updatedAt": "2026-07-28T02:40:52.000Z",
+                          "uid": "35240-f6ac4fca-2828-4db8-b380-d2ecb7dadbb6"
+                        }
+                      ],
+                      "id": "5512908f-786d-47b6-a2f5-328881d9beff",
+                      "createdAt": "2026-07-28T02:40:52.000Z",
+                      "updatedAt": "2026-07-28T02:40:52.000Z",
+                      "uid": "35240-5512908f-786d-47b6-a2f5-328881d9beff"
+                    }
+                  ],
+                  "id": "2bd32778-d05a-4237-a8f1-dd13df299250",
+                  "createdAt": "2026-07-28T02:40:52.000Z",
+                  "updatedAt": "2026-07-28T02:40:52.000Z",
+                  "uid": "35240-2bd32778-d05a-4237-a8f1-dd13df299250"
+                }
+              ],
+              "id": "e9cc8ba7-6138-4750-8715-d4740fce7bda",
+              "createdAt": "2026-07-28T02:40:52.000Z",
+              "updatedAt": "2026-07-28T02:40:52.000Z",
+              "uid": "35240-e9cc8ba7-6138-4750-8715-d4740fce7bda"
+            }
+          ],
+          "id": "25d93f24-1206-4990-aab0-f9c8998fa6b5",
+          "createdAt": "2026-07-28T02:40:52.000Z",
+          "updatedAt": "2026-07-28T02:40:52.000Z",
+          "uid": "35240-25d93f24-1206-4990-aab0-f9c8998fa6b5"
+        }
+      ],
+      "id": "8fe89638-1276-490f-90b6-7ac57f9129bd",
+      "createdAt": "2026-07-28T02:40:52.000Z",
+      "updatedAt": "2026-07-28T02:40:52.000Z",
+      "uid": "35240-8fe89638-1276-490f-90b6-7ac57f9129bd"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://public-api.productiv.com"
+    }
+  ]
+}

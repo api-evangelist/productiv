@@ -1,0 +1,322 @@
+{
+  "info": {
+    "_postman_id": "67d04745-dd1f-44bb-99c7-e039df714bc5",
+    "name": "Productiv Developer App Details Usage Events API",
+    "description": "The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.\n\nContact Support:\n Name: Productiv Support\n Email: support@productiv.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:41:04.000Z",
+    "updatedAt": "2026-07-28T02:41:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-67d04745-dd1f-44bb-99c7-e039df714bc5"
+  },
+  "item": [
+    {
+      "name": "services",
+      "item": [
+        {
+          "name": "push",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "customer",
+                  "item": [
+                    {
+                      "name": "apps",
+                      "item": [
+                        {
+                          "name": "{appId}",
+                          "item": [
+                            {
+                              "name": "usage-events",
+                              "item": [
+                                {
+                                  "name": "Productiv Publish Usage Events",
+                                  "id": "900f6301-5de8-47d4-99a1-23b7100f1098",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"events\": [\n    {\n      \"timestamp\": \"<long>\",\n      \"email\": \"<email>\",\n      \"eventName\": \"<string>\"\n    },\n    {\n      \"timestamp\": \"<long>\",\n      \"email\": \"<email>\",\n      \"eventName\": \"<string>\"\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/usage-events",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "services",
+                                        "push",
+                                        "v1",
+                                        "customer",
+                                        "apps",
+                                        ":appId",
+                                        "usage-events"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "1afd983a-fb99-4299-b104-27625baf066a",
+                                          "key": "appId",
+                                          "value": "<string>",
+                                          "description": "(Required) The unique identifier of the application."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Push usage events for an application to Productiv. Usage events represent actions performed by users, such as starting a video call, sending messages, or uploading files. Every event is uniquely identified by the combination of timestamp, email, and eventName. A maximum of 1000 events can be pushed per request."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "957ee807-0537-457c-a28a-d1426335b71b",
+                                      "name": "Events published successfully.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"events\": [\n    {\n      \"timestamp\": \"<long>\",\n      \"email\": \"<email>\",\n      \"eventName\": \"<string>\"\n    },\n    {\n      \"timestamp\": \"<long>\",\n      \"email\": \"<email>\",\n      \"eventName\": \"<string>\"\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/usage-events",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "push",
+                                            "v1",
+                                            "customer",
+                                            "apps",
+                                            ":appId",
+                                            "usage-events"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "appId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:41:04.000Z",
+                                      "updatedAt": "2026-07-28T02:41:04.000Z",
+                                      "uid": "35240-957ee807-0537-457c-a28a-d1426335b71b"
+                                    },
+                                    {
+                                      "id": "6d9f8707-db93-4432-bac6-fb130ac43e6f",
+                                      "name": "Bad request.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"events\": [\n    {\n      \"timestamp\": \"<long>\",\n      \"email\": \"<email>\",\n      \"eventName\": \"<string>\"\n    },\n    {\n      \"timestamp\": \"<long>\",\n      \"email\": \"<email>\",\n      \"eventName\": \"<string>\"\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/usage-events",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "push",
+                                            "v1",
+                                            "customer",
+                                            "apps",
+                                            ":appId",
+                                            "usage-events"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "appId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Bad Request",
+                                      "code": 400,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:41:04.000Z",
+                                      "updatedAt": "2026-07-28T02:41:04.000Z",
+                                      "uid": "35240-6d9f8707-db93-4432-bac6-fb130ac43e6f"
+                                    },
+                                    {
+                                      "id": "53c0c095-e988-4af1-bdac-ca3722aecc82",
+                                      "name": "Unauthorized.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"events\": [\n    {\n      \"timestamp\": \"<long>\",\n      \"email\": \"<email>\",\n      \"eventName\": \"<string>\"\n    },\n    {\n      \"timestamp\": \"<long>\",\n      \"email\": \"<email>\",\n      \"eventName\": \"<string>\"\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/services/push/v1/customer/apps/:appId/usage-events",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "services",
+                                            "push",
+                                            "v1",
+                                            "customer",
+                                            "apps",
+                                            ":appId",
+                                            "usage-events"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "appId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:41:04.000Z",
+                                      "updatedAt": "2026-07-28T02:41:04.000Z",
+                                      "uid": "35240-53c0c095-e988-4af1-bdac-ca3722aecc82"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T02:41:04.000Z",
+                                  "updatedAt": "2026-07-28T02:41:04.000Z",
+                                  "uid": "35240-900f6301-5de8-47d4-99a1-23b7100f1098"
+                                }
+                              ],
+                              "id": "e51749b9-70b5-4a97-98ef-4eb24fe27e3d",
+                              "createdAt": "2026-07-28T02:41:04.000Z",
+                              "updatedAt": "2026-07-28T02:41:04.000Z",
+                              "uid": "35240-e51749b9-70b5-4a97-98ef-4eb24fe27e3d"
+                            }
+                          ],
+                          "id": "69fa796a-ba92-42e0-9b13-50d26446e579",
+                          "createdAt": "2026-07-28T02:41:04.000Z",
+                          "updatedAt": "2026-07-28T02:41:04.000Z",
+                          "uid": "35240-69fa796a-ba92-42e0-9b13-50d26446e579"
+                        }
+                      ],
+                      "id": "f33e1ac2-0a1d-4c9d-80d0-50223e9f5148",
+                      "createdAt": "2026-07-28T02:41:04.000Z",
+                      "updatedAt": "2026-07-28T02:41:04.000Z",
+                      "uid": "35240-f33e1ac2-0a1d-4c9d-80d0-50223e9f5148"
+                    }
+                  ],
+                  "id": "7c45bdb7-7186-4786-b4fb-f4caf4c76d37",
+                  "createdAt": "2026-07-28T02:41:04.000Z",
+                  "updatedAt": "2026-07-28T02:41:04.000Z",
+                  "uid": "35240-7c45bdb7-7186-4786-b4fb-f4caf4c76d37"
+                }
+              ],
+              "id": "e91734c3-8af2-43d3-9956-d2ca733cd720",
+              "createdAt": "2026-07-28T02:41:04.000Z",
+              "updatedAt": "2026-07-28T02:41:04.000Z",
+              "uid": "35240-e91734c3-8af2-43d3-9956-d2ca733cd720"
+            }
+          ],
+          "id": "e1fafbcc-af11-441e-a8c7-19eead4bf307",
+          "createdAt": "2026-07-28T02:41:04.000Z",
+          "updatedAt": "2026-07-28T02:41:04.000Z",
+          "uid": "35240-e1fafbcc-af11-441e-a8c7-19eead4bf307"
+        }
+      ],
+      "id": "02f2e98a-e5e0-43db-a492-0e1c9f92be74",
+      "createdAt": "2026-07-28T02:41:04.000Z",
+      "updatedAt": "2026-07-28T02:41:04.000Z",
+      "uid": "35240-02f2e98a-e5e0-43db-a492-0e1c9f92be74"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://public-api.productiv.com"
+    }
+  ]
+}
