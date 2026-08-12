@@ -489,10 +489,6 @@ common:
     type: Rules
   - url: vocabulary/productiv-vocabulary.yaml
     type: Vocabulary
-  - url: capabilities/shared/developer-api.yaml
-    type: Capabilities
-  - url: capabilities/saas-management.yaml
-    type: Capabilities
   - url: https://productiv.com/blog
     type: Blog
 maintainers:
