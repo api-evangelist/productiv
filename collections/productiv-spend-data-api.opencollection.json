@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Productiv Developer App Details Spend Data API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Spend Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv Publish Spend Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public-api.productiv.com/services/push/v1/customer/apps/:appId/spend",
+            "params": [
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Push spend data to Productiv for an application from one or more existing systems. Before using this API, the application must be set up and a unique appId obtained."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Productiv Developer App Details Batch Upload API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Batch Upload",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv Get Batch File Upload Urls",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.productiv.com/services/push/v1/customer/apps/:appId/upload",
+            "params": [
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the application."
+              },
+              {
+                "name": "filenames",
+                "value": "",
+                "type": "query",
+                "description": "The filenames to upload. Can be specified multiple times."
+              }
+            ]
+          },
+          "docs": "Get signed upload URLs for batch file uploads. Specify the filenames to upload as query parameters, and the response will return signed URLs for each file. Use the returned signed URLs to PUT each file."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

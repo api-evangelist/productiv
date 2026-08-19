@@ -1,0 +1,215 @@
+{
+  "item": [
+    {
+      "id": "6539c979-0cde-4c8c-baaf-c45764cd2b6f",
+      "name": "Audit Events",
+      "description": {
+        "content": "Fetch audit events for activities performed on the Productiv platform.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b78e694f-7b13-4c94-aae2-2deadc30bb2b",
+          "name": "Productiv Get Audit Events",
+          "request": {
+            "name": "Productiv Get Audit Events",
+            "description": {
+              "content": "Fetch a stream of audit events for activities performed by users on the Productiv platform. Each request returns a maximum of 500 events. If more events exist in the queried time range, the response contains a nextPageToken for pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                "export",
+                "v1",
+                "customer",
+                "audit-events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "Start time for the query range."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<dateTime>",
+                  "description": "End time for the query range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nextPageToken",
+                  "value": "<string>",
+                  "description": "Token for fetching the next page of results, obtained from a previous response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8b4b4d0-3b25-4ac4-886d-1c95cd091073",
+              "name": "Audit events returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    "export",
+                    "v1",
+                    "customer",
+                    "audit-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "nextPageToken",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"events\": [\n    {\n      \"eventId\": \"500123\",\n      \"eventType\": \"example_value\",\n      \"timestamp\": \"2026-01-15T10:30:00Z\",\n      \"userEmail\": \"user@example.com\",\n      \"details\": \"example_value\"\n    }\n  ],\n  \"nextPageToken\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9f355c9-d0df-4a35-8a10-45a70b69b97a",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    "export",
+                    "v1",
+                    "customer",
+                    "audit-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "nextPageToken",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://public-api.productiv.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "905c9ac0-fde6-4924-b47c-ec385e9c5539",
+    "name": "Productiv Developer App Details Audit Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.\n\nContact Support:\n Name: Productiv Support\n Email: support@productiv.com",
+      "type": "text/plain"
+    }
+  }
+}

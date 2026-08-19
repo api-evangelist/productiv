@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Productiv Developer App Details Provisioning Workflows API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Provisioning Workflows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv List Provisioning Workflows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.productiv.com/services/export/v1/customer/provisioning-workflows"
+          },
+          "docs": "Query the entire list of provisioning workflows configured on your account. Rate limit is 20 requests per second."
+        },
+        {
+          "info": {
+            "name": "Productiv List Provisioning Execution Summaries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.productiv.com/services/export/v1/customer/provisioning-workflows/:workflowId/executions",
+            "params": [
+              {
+                "name": "workflowId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the provisioning workflow."
+              },
+              {
+                "name": "startTime",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "Start time for the time range filter."
+              },
+              {
+                "name": "endTime",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "End time for the time range filter."
+              }
+            ]
+          },
+          "docs": "Query a list of provisioning workflow execution summaries for an application instance within a time range."
+        },
+        {
+          "info": {
+            "name": "Productiv Get Provisioning Workflow Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.productiv.com/services/export/v1/customer/provisioning-workflows/:workflowId/executions/:executionId",
+            "params": [
+              {
+                "name": "workflowId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the provisioning workflow."
+              },
+              {
+                "name": "executionId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the execution."
+              }
+            ]
+          },
+          "docs": "Query the details of a specific provisioning workflow execution, including suggested or actioned outcomes for matched users."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

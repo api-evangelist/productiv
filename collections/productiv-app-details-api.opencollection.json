@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Productiv Developer App Details API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "App Details",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv Get App Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.productiv.com/services/export/v1/customer/app-details/:applicationId",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the application, obtained from the App Summaries endpoint."
+              }
+            ]
+          },
+          "docs": "Fetch detailed information about a particular app that is not provided in the App Summaries response. Additional details include Instances, Activity, Contract, Fiscal Spend, Compliance, and SSO Protocols. Rate limit is 20 requests per second."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

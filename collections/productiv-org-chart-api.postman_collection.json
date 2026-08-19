@@ -1,0 +1,242 @@
+{
+  "item": [
+    {
+      "id": "b1131c61-5433-4e37-98ca-370b7ed248b6",
+      "name": "Org Chart",
+      "description": {
+        "content": "Publish organizational chart data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8e067732-e234-4352-9132-8a47129e12bb",
+          "name": "Productiv Publish Org Chart",
+          "request": {
+            "name": "Productiv Publish Org Chart",
+            "description": {
+              "content": "Publish organizational chart data to Productiv. The endpoint accepts no more than 1000 users per request. Multiple PUT requests to the same resource ID are required if more than 1000 users need to be added.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                "push",
+                "v1",
+                "customer",
+                "org-chart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"users\": [\n    {\n      \"email\": \"<email>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"managerEmail\": \"<email>\",\n      \"department\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"managerEmail\": \"<email>\",\n      \"department\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"customFieldsConfig\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4aab36d0-f795-4953-84d9-e63b586280ed",
+              "name": "Org chart published successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    "push",
+                    "v1",
+                    "customer",
+                    "org-chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"email\": \"user@example.com\",\n      \"firstName\": \"example_value\",\n      \"lastName\": \"example_value\",\n      \"managerEmail\": \"user@example.com\",\n      \"department\": \"example_value\",\n      \"title\": \"Example Title\"\n    }\n  ],\n  \"customFieldsConfig\": [\n    {\n      \"name\": \"Example Title\",\n      \"type\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "06b7744b-4c53-495b-a7d5-643b79454849",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    "push",
+                    "v1",
+                    "customer",
+                    "org-chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"email\": \"user@example.com\",\n      \"firstName\": \"example_value\",\n      \"lastName\": \"example_value\",\n      \"managerEmail\": \"user@example.com\",\n      \"department\": \"example_value\",\n      \"title\": \"Example Title\"\n    }\n  ],\n  \"customFieldsConfig\": [\n    {\n      \"name\": \"Example Title\",\n      \"type\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ae3e9549-3fbc-4adc-937f-daf685f811ce",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    "push",
+                    "v1",
+                    "customer",
+                    "org-chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"email\": \"user@example.com\",\n      \"firstName\": \"example_value\",\n      \"lastName\": \"example_value\",\n      \"managerEmail\": \"user@example.com\",\n      \"department\": \"example_value\",\n      \"title\": \"Example Title\"\n    }\n  ],\n  \"customFieldsConfig\": [\n    {\n      \"name\": \"Example Title\",\n      \"type\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://public-api.productiv.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1267a9b4-3aa1-460e-9eeb-08394295a030",
+    "name": "Productiv Developer App Details Org Chart API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.\n\nContact Support:\n Name: Productiv Support\n Email: support@productiv.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Productiv Developer App Details App Summaries API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "App Summaries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv Get App Summaries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.productiv.com/services/export/v1/customer/app-summaries"
+          },
+          "docs": "Query the entire list of apps that are part of your company's portfolio. Returns a small set of app attributes such as ApplicationId, AppStatus, and VendorName. For more detailed information about a particular app, use the App Details endpoint with the ApplicationId. Rate limit is 20 requests per second."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

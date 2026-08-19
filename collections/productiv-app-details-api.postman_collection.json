@@ -1,0 +1,249 @@
+{
+  "item": [
+    {
+      "id": "a2850809-a73d-4ab3-b300-2ffb4929440e",
+      "name": "App Details",
+      "description": {
+        "content": "Fetch detailed information about a particular app.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2f7b2815-3703-4496-bb2d-a32285f1f839",
+          "name": "Productiv Get App Details",
+          "request": {
+            "name": "Productiv Get App Details",
+            "description": {
+              "content": "Fetch detailed information about a particular app that is not provided in the App Summaries response. Additional details include Instances, Activity, Contract, Fiscal Spend, Compliance, and SSO Protocols. Rate limit is 20 requests per second.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                "export",
+                "v1",
+                "customer",
+                "app-details",
+                ":applicationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "applicationId",
+                  "description": "(Required) The unique identifier of the application, obtained from the App Summaries endpoint."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4947bc06-115c-4f0b-a21d-6ad17394a9a5",
+              "name": "App details returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    "export",
+                    "v1",
+                    "customer",
+                    "app-details",
+                    ":applicationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique identifier of the application, obtained from the App Summaries endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ApplicationId\": \"500123\",\n  \"AppName\": \"example_value\",\n  \"AppStatus\": \"example_value\",\n  \"VendorName\": \"example_value\",\n  \"Instances\": [\n    {\n      \"instanceId\": \"500123\",\n      \"instanceName\": \"example_value\"\n    }\n  ],\n  \"Activity\": {\n    \"totalUsers\": 10,\n    \"activeUsers\": 10,\n    \"lastActivityDate\": \"2026-01-15\"\n  },\n  \"Contracts\": [\n    {\n      \"contractId\": \"500123\",\n      \"startDate\": \"2026-01-15\",\n      \"endDate\": \"2026-01-15\",\n      \"totalValue\": 42.5\n    }\n  ],\n  \"FiscalSpend\": {\n    \"totalSpend\": 42.5,\n    \"currency\": \"example_value\"\n  },\n  \"Compliance\": {\n    \"standards\": [\n      \"example_value\"\n    ]\n  },\n  \"SSOProtocols\": [\n    \"example_value\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "856e92a3-28f2-4a9c-860c-2a3c0d223803",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    "export",
+                    "v1",
+                    "customer",
+                    "app-details",
+                    ":applicationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique identifier of the application, obtained from the App Summaries endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3c20f224-bb86-40ba-a89b-d42cc0478da4",
+              "name": "Application not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    "export",
+                    "v1",
+                    "customer",
+                    "app-details",
+                    ":applicationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique identifier of the application, obtained from the App Summaries endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://public-api.productiv.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "09a72825-aabf-4d2c-902f-7d427cb34aba",
+    "name": "Productiv Developer App Details API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Once an application is properly defined, Productiv supports APIs for pushing usage events and user information in a standardized format, as well as Data Export APIs for fetching your company's app portfolio, detailed app information, provisioning workflows, and audit events.\n\nContact Support:\n Name: Productiv Support\n Email: support@productiv.com",
+      "type": "text/plain"
+    }
+  }
+}

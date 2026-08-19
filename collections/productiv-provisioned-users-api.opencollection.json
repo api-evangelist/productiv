@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Productiv Developer App Details Provisioned Users API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Provisioned Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv Get Provisioned Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.productiv.com/services/push/v1/customer/apps/:appId/users",
+            "params": [
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the application."
+              }
+            ]
+          },
+          "docs": "Retrieve the list of users provisioned to an application."
+        },
+        {
+          "info": {
+            "name": "Productiv Publish Provisioned Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public-api.productiv.com/services/push/v1/customer/apps/:appId/users",
+            "params": [
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add provisioned users for an application in Productiv. Productiv treats the set of provisioned users updated by the developer APIs as the current list of all users for the application."
+        },
+        {
+          "info": {
+            "name": "Productiv Delete Provisioned Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://public-api.productiv.com/services/push/v1/customer/apps/:appId/users",
+            "params": [
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove provisioned users from an application in Productiv."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

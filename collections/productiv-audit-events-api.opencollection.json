@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Productiv Developer App Details Audit Events API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Audit Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv Get Audit Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.productiv.com/services/export/v1/customer/audit-events",
+            "params": [
+              {
+                "name": "startTime",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "Start time for the query range."
+              },
+              {
+                "name": "endTime",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "End time for the query range."
+              },
+              {
+                "name": "nextPageToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "Token for fetching the next page of results, obtained from a previous response."
+              }
+            ]
+          },
+          "docs": "Fetch a stream of audit events for activities performed by users on the Productiv platform. Each request returns a maximum of 500 events. If more events exist in the queried time range, the response contains a nextPageToken for pagination."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

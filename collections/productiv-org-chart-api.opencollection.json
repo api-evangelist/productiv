@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Productiv Developer App Details Org Chart API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Org Chart",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Productiv Publish Org Chart",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://public-api.productiv.com/services/push/v1/customer/org-chart",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publish organizational chart data to Productiv. The endpoint accepts no more than 1000 users per request. Multiple PUT requests to the same resource ID are required if more than 1000 users need to be added."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
