@@ -29,7 +29,7 @@ tags:
 created: '2025-07-11'
 modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/productiv/refs/heads/main/apis.yml
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: productiv:productiv-app-details-api
   name: Productiv App Details API
