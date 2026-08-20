@@ -109,6 +109,8 @@ apis:
   humanURL: https://docs.app.productiv.com/developer-api/index.html
   baseURL: https://public-api.productiv.com
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
