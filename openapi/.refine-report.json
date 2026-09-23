@@ -1,17 +1,7 @@
 {
   "provider": "productiv",
   "sources": [
-    "productiv-app-details-api-openapi.yml",
-    "productiv-app-summaries-api-openapi.yml",
-    "productiv-applications-api-openapi.yml",
-    "productiv-audit-events-api-openapi.yml",
-    "productiv-authentication-api-openapi.yml",
-    "productiv-batch-upload-api-openapi.yml",
-    "productiv-org-chart-api-openapi.yml",
-    "productiv-provisioned-users-api-openapi.yml",
-    "productiv-provisioning-workflows-api-openapi.yml",
-    "productiv-spend-data-api-openapi.yml",
-    "productiv-usage-events-api-openapi.yml"
+    "_original/productiv-developer-openapi.yml"
   ],
   "outputs": [
     "productiv-app-details-api-openapi.yml",
@@ -29,6 +19,22 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "productiv-developer-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "productiv-app-details-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "productiv-app-summaries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "productiv-applications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "productiv-audit-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "productiv-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "productiv-batch-upload-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "productiv-org-chart-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "productiv-provisioned-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "productiv-provisioning-workflows-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "productiv-spend-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "productiv-usage-events-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
