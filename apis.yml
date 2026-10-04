@@ -442,6 +442,9 @@ apis:
   - type: JSONLD
     url: json-ld/productiv-context.jsonld
 common:
+  - type: CapabilityMap
+    url: capabilities/productiv-capability-edges.yml
+    name: Productiv Business Capability Map
   - type: Website
     url: https://www.productiv.com/
   - type: PostmanWorkspace

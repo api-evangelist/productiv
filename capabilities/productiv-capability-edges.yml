@@ -1,0 +1,45 @@
+slug: productiv
+provider: Productiv
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: App Details
+  spec_file: productiv-app-details-api-openapi.yml
+  capability_id: BC-600.60
+  capability_id_l1: BC-600
+  capability_name: IT Application Management
+  confidence: 0.75
+  evidence: GET /services/export/v1/customer/app-details/{applicationId}  Productiv Get App Details; "Data
+    Export APIs for fetching your company's app portfolio, detailed app information"
+  reason: Exports detailed information about applications in the customer's SaaS portfolio (usage, spend,
+    provisioning) — IT application lifecycle/rationalisation management. Schema AppDetails corroborates.
+- tag: Spend Data
+  spec_file: productiv-spend-data-api-openapi.yml
+  capability_id: BC-600.80
+  capability_id_l1: BC-600
+  capability_name: IT Financial Management
+  confidence: 0.72
+  evidence: POST /services/push/v1/customer/apps/{appId}/spend  publishSpendData  Productiv Publish Spend
+    Data
+  reason: Pushes per-application spend data into a SaaS management platform described as providing 'spend
+    data' across the SaaS portfolio — i.e. IT spend visibility and cost management.
+- tag: App Summaries
+  spec_file: productiv-app-summaries-api-openapi.yml
+  capability_id: BC-600.60
+  capability_id_l1: BC-600
+  capability_name: IT Application Management
+  confidence: 0.7
+  evidence: GET /services/export/v1/customer/app-summaries  Productiv Get App Summaries; "fetching your
+    company's app portfolio"
+  reason: Portfolio-level summaries of the company's applications from a SaaS management platform — IT
+    application management, with some overlap into IT portfolio and IT financial management, hence 0.7.
