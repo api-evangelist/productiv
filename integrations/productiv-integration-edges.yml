@@ -3,6 +3,7 @@ method: searched
 checked:
 - https://marketplace.atlassian.com/
 - okta/integrations/okta-integration-edges.yml
+- zoom/integrations/zoom-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: Atlassian Marketplace
@@ -46,5 +47,22 @@ edges:
   - IDENTITY_SECURITY_POSTURE_MANAGEMENT
   - SAML
   - UPDATE
+- partner_name: Zoom (own)
+  partner: zoom
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.zoom.us/apps/aqJrTrvDR9aCYUlJhcPv0g
+  mirror_of: zoom/integrations/zoom-integration-edges.yml
+  apps:
+  - Productiv
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Zoom app
 source:
 - https://marketplace.atlassian.com/
