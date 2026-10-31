@@ -1,4 +1,4 @@
-# Productiv (productiv)
+# Productiv
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,81 +66,198 @@
 
 The SaaS Management Platform that delivers the industrys most comprehensive view of your SaaS portfolio with deep usage analytics, spend data, and feature-level insights to power the technology decisions that support your business.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/productiv/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/productiv/refs/heads/main/apis.yml)
+**Areas:** Application Portfolio · Provisioning · SaaS Management · Spend Management · Usage Analytics
 
-## Scope
+## Productiv on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Productiv is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/productiv/](https://apis.io/providers/productiv/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (11)
 
-- Application Portfolio
-- Provisioning
-- SaaS Management
-- Spend Management
-- Usage Analytics
+- [Productiv App Details API](https://apis.io/apis/productiv/productiv-app-details-api/) — Fetch detailed information about a particular app.
+- [Productiv App Summaries API](https://apis.io/apis/productiv/productiv-app-summaries-api/) — Query the list of apps in your company portfolio.
+- [Productiv Applications API](https://apis.io/apis/productiv/productiv-applications-api/) — Set up and manage custom applications within Productiv.
+- [Productiv Audit Events API](https://apis.io/apis/productiv/productiv-audit-events-api/) — Fetch audit events for activities performed on the Productiv platform.
+- [Productiv Authentication API](https://apis.io/apis/productiv/productiv-authentication-api/) — OAuth2 token endpoint for obtaining access tokens.
+- [Productiv Batch Upload API](https://apis.io/apis/productiv/productiv-batch-upload-api/) — Upload files in batch for applications.
+- [Productiv Org Chart API](https://apis.io/apis/productiv/productiv-org-chart-api/) — Publish organizational chart data.
+- [Productiv Provisioned Users API](https://apis.io/apis/productiv/productiv-provisioned-users-api/) — Manage users provisioned to custom integrations.
+- [Productiv Provisioning Workflows API](https://apis.io/apis/productiv/productiv-provisioning-workflows-api/) — Fetch provisioning workflows and execution details.
+- [Productiv Spend Data API](https://apis.io/apis/productiv/productiv-spend-data-api/) — Publish spend data for applications.
+- [Productiv Usage Events API](https://apis.io/apis/productiv/productiv-usage-events-api/) — Publish usage events for applications.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-07-11
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Productiv Developer API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Productiv Developer APIs support integrating custom applications into the Productiv platform, allowing external developers to define and publish new connected applications. Includes APIs for pushing usage events and user information, Data Export APIs for fetching app portfolio details, provisioning workflows, and audit events.
+- [Productiv Agentic Access](https://apis.io/agentic-access/productiv/productiv-agentic-access/)
 
-- **Human URL:** [https://docs.app.productiv.com/developer-api/index.html](https://docs.app.productiv.com/developer-api/index.html)
-- **Base URL:** `https://public-api.productiv.com`
+#### JSON Schema (11)
 
-#### Tags
+The data models the API reads and writes.
 
-- Application Portfolio
-- Audit Events
-- Data Export
-- Provisioning
-- SaaS Management
-- Spend Data
-- Usage Analytics
+- [AppDetails](https://apis.io/schemas/productiv/app-details/)
+- [AppSummary](https://apis.io/schemas/productiv/app-summary/)
+- [Application](https://apis.io/schemas/productiv/application/)
+- [AuditEvent](https://apis.io/schemas/productiv/audit-event/)
+- [OrgChartUser](https://apis.io/schemas/productiv/org-chart-user/)
+- [AppDetails](https://apis.io/schemas/productiv/productiv-developer-app-details/)
+- [AppSummary](https://apis.io/schemas/productiv/productiv-developer-app-summary/)
+- [ProvisionedUser](https://apis.io/schemas/productiv/provisioned-user/)
+- [ProvisioningWorkflow](https://apis.io/schemas/productiv/provisioning-workflow/)
+- [SpendData](https://apis.io/schemas/productiv/spend-data/)
+- [UsageEvent](https://apis.io/schemas/productiv/usage-event/)
 
-#### Properties
+#### JSON Structure (2)
 
-- [Documentation](https://docs.app.productiv.com/developer-api/index.html)
-- [OpenAPI](openapi/productiv-developer-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/productiv-developer.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/productiv-developer.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Authentication](https://docs.app.productiv.com/developer-api/authorization.html)
-- [Getting Started](https://docs.app.productiv.com/developer-api/data-export-getting-started.html)
-- [JSON Schema](json-schema/application.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/app-summary.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/app-details.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/usage-event.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/spend-data.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/provisioned-user.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/org-chart-user.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/provisioning-workflow.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/audit-event.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/productiv-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+Data models expressed in JSON Structure.
 
-## Common Properties
+- [Productiv Developer App Details Structure](https://apis.io/json-structure/productiv/productiv-developer-app-details-structure/)
+- [Productiv Developer App Summary Structure](https://apis.io/json-structure/productiv/productiv-developer-app-summary-structure/)
 
-- [GitHub Organization](https://github.com/BeProductiv)
-- [LinkedIn](https://www.linkedin.com/company/productiv)
+#### JSON-LD (2)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Productiv Context](https://apis.io/jsonld/productiv/productiv-context/)
+- [Productiv Developer Context](https://apis.io/jsonld/productiv/productiv-developer-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [productiv API Vocabulary](https://apis.io/vocabularies/productiv/productiv-vocabulary/)
+
+#### Examples (2)
+
+Example requests and responses.
+
+- [Productiv Developer App Details Example](https://apis.io/examples/productiv/productiv-developer-app-details-example/)
+- [Productiv Developer App Summary Example](https://apis.io/examples/productiv/productiv-developer-app-summary-example/)
+
+#### Collections (23)
+
+Postman and Open Collection request collections.
+
+- [Productiv Developer App Details API](https://apis.io/collections/productiv/open-productiv-app-details-api/)
+- [Productiv Developer App Details App Summaries API](https://apis.io/collections/productiv/open-productiv-app-summaries-api/)
+- [Productiv Developer App Details Applications API](https://apis.io/collections/productiv/open-productiv-applications-api/)
+- [Productiv Developer App Details Audit Events API](https://apis.io/collections/productiv/open-productiv-audit-events-api/)
+- [Productiv Developer App Details Authentication API](https://apis.io/collections/productiv/open-productiv-authentication-api/)
+- [Productiv Developer App Details Batch Upload API](https://apis.io/collections/productiv/open-productiv-batch-upload-api/)
+- [Productiv Developer API](https://apis.io/collections/productiv/open-productiv-developer/)
+- [Productiv Developer App Details Org Chart API](https://apis.io/collections/productiv/open-productiv-org-chart-api/)
+- [Productiv Developer App Details Provisioned Users API](https://apis.io/collections/productiv/open-productiv-provisioned-users-api/)
+- [Productiv Developer App Details Provisioning Workflows API](https://apis.io/collections/productiv/open-productiv-provisioning-workflows-api/)
+- [Productiv Developer App Details Spend Data API](https://apis.io/collections/productiv/open-productiv-spend-data-api/)
+- [Productiv Developer App Details Usage Events API](https://apis.io/collections/productiv/open-productiv-usage-events-api/)
+- [Productiv Developer App Details API](https://apis.io/collections/productiv/postman-productiv-app-details-api/)
+- [Productiv Developer App Details App Summaries API](https://apis.io/collections/productiv/postman-productiv-app-summaries-api/)
+- [Productiv Developer App Details Applications API](https://apis.io/collections/productiv/postman-productiv-applications-api/)
+- [Productiv Developer App Details Audit Events API](https://apis.io/collections/productiv/postman-productiv-audit-events-api/)
+- [Productiv Developer App Details Authentication API](https://apis.io/collections/productiv/postman-productiv-authentication-api/)
+- [Productiv Developer App Details Batch Upload API](https://apis.io/collections/productiv/postman-productiv-batch-upload-api/)
+- [Productiv Developer App Details Org Chart API](https://apis.io/collections/productiv/postman-productiv-org-chart-api/)
+- [Productiv Developer App Details Provisioned Users API](https://apis.io/collections/productiv/postman-productiv-provisioned-users-api/)
+- [Productiv Developer App Details Provisioning Workflows API](https://apis.io/collections/productiv/postman-productiv-provisioning-workflows-api/)
+- [Productiv Developer App Details Spend Data API](https://apis.io/collections/productiv/postman-productiv-spend-data-api/)
+- [Productiv Developer App Details Usage Events API](https://apis.io/collections/productiv/postman-productiv-usage-events-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Productiv — jsonschema rules](https://apis.io/rules/productiv/productiv-jsonschema-spectral-rules/)
+- [Productiv API Rules](https://apis.io/rules/productiv/productiv-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Productiv Authentication](https://apis.io/security/productiv/productiv-authentication/)
+- [Productiv Domain Security](https://apis.io/security/productiv/productiv-domain-security/)
+- [Productiv Trust Center](https://apis.io/security/productiv/productiv-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Productiv Plans Pricing](https://apis.io/plans/productiv/productiv-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Productiv Rate Limits](https://apis.io/rate-limits/productiv/productiv-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Productiv Finops](https://apis.io/finops/productiv/productiv-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.productiv.com/)
 - [Documentation](https://docs.app.productiv.com/)
-- [Developer Portal](https://productiv.com/)
-- [Authentication](https://docs.app.productiv.com/developer-api/authorization.html)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
-- [Rules](rules/productiv-spectral-rules.yml)
-- [Vocabulary](vocabulary/productiv-vocabulary.yaml)
-- [Capabilities](capabilities/shared/developer-api.yaml)
-- [Capabilities](capabilities/saas-management.yaml)
+- [Blog](https://productiv.com/blog)
+- [GitHub](https://github.com/BeProductiv)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 36.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 62.4 |
+| Contract governance | 27.3 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 29.8 |
+| Access clarity | 15.8 |
+
+**Agent readiness 22.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 21.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/productiv/](https://apis.io/providers/productiv/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Productiv: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/productiv/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
